@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-npt+w$k$$&#+0@f^12a&@w(-#=b4qhok^3udhkqnf#q#^@p8c&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.50.190']
 
 
 # Application definition
@@ -120,8 +120,17 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
+#STATIC_URL: specifies what to append when you call `{% static %}` as template tag. 
+STATIC_URL = '/static/'
 
-STATIC_URL = 'static/'
+#STATIC_ROOT: specifies where exactly you yourself will put your static files
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticroot')
+
+#STATICFILES_DIRS: it tells Django where to look for static files while 
+#serving a request. 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

@@ -1,14 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Connects CSS style sheet -->
+    <link rel="stylesheet" href="{% static "loginView/css/loginStyle.css" %}">
     <title>Login to DishOut</title>
 </head>
 <body>
-    <!-- Makes a header that says DishOut -->
-    <h1>DishOut</h1>
+    <!-- Adds logo to the page -->
+    <img src="{% static "loginView/images/logo.png" %}" alt="DishOut logo" width="700" height="400">
     <!-- Creates a form with 2 fields: Username and Password. It also adds a submit button. 
         changed to using post for security -->
     <form action="." method="POST">
