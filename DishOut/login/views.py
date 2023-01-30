@@ -1,28 +1,26 @@
-from django.http import HttpResponse
 from django.template.response import TemplateResponse
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import TemplateView
-import hashlib
-from MainDatabase.models import Employees
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse
 
 class login(TemplateView, View):
-    template_name = "index.html"
+    template_name = "login.html"
     def get(self, request):
-        return TemplateResponse(request, 'index.html')
+        return TemplateResponse(request, 'login.html')
 
     def post(self,request):
-        print(request.POST)
         if request.method == 'POST':
-            Username = request.POST.get('Username')
-            password = request.POST.get('Password')
-            try:
-                user = Employees.objects.get(Username=Username)
-                if hashlib.sha256(password.encode()).hexdigest() == user.Password:
-                    return HttpResponse('Logged in')
-                else:
-                    return HttpResponse('Incorrect password')
-            except Employees.DoesNotExist:
-                    return HttpResponse('Incorrect username/password')
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, username)
+            else:
+                return HttpResponse("<h1>User Not Found</h1> <a href="">Try Again?</a>")
+
                 
