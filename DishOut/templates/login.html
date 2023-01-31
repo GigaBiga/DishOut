@@ -10,20 +10,28 @@
     <link rel="stylesheet" href="{% static "loginView/css/loginStyle.css" %}">
     <title>Login to DishOut</title>
 </head>
-<body> 
-    <!-- Adds logo to the page -->
-    <img src="{% static "loginView/images/logo.png" %}" alt="DishOut logo">
-    <!-- Creates a form with 2 fields: Username and Password. It also adds a submit button. 
-        changed to using post for security -->
-    <form action="." method="POST">
-        {% csrf_token %}
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-        <input type="submit" value="Login">
-    </form>
-    </form>
+<body>
+    <div id="hope">
+        <div class="login">
+            <!-- Adds logo to the page -->
+            <img src="{% static "loginView/images/logo.png" %}" alt="DishOut logo">
+            <!-- Creates a form with 2 fields: Username and Password. It also adds a submit button. 
+                changed to using post for security -->
+            <form action="." method="POST">
+                {% csrf_token %}
+                <div class="formItems">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username">
+                </div>
+                <div class="formItems">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password">
+                </div>
+                <input id = 'SubmitButton' type="submit" value="Login">
+            </form>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
 
