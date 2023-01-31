@@ -22,4 +22,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('',views.loginView.as_view()),
     path('admin/', admin.site.urls),
+    path('waiter/',include('waiter.urls')),
 ] 
