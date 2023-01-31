@@ -123,9 +123,6 @@ USE_TZ = True
 #STATIC_URL: specifies what to append when you call `{% static %}` as template tag. 
 STATIC_URL = '/static/'
 
-#STATIC_ROOT: specifies where exactly you yourself will put your static files
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticroot')
-
 #STATICFILES_DIRS: it tells Django where to look for static files while 
 #serving a request. 
 STATICFILES_DIRS = [

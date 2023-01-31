@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +10,9 @@
     <link rel="stylesheet" href="{% static "loginView/css/loginStyle.css" %}">
     <title>Login to DishOut</title>
 </head>
-<body>
+<body> 
     <!-- Adds logo to the page -->
-    <img src="{% static "loginView/images/logo.png" %}" alt="DishOut logo" width="700" height="400">
+    <img src="{% static "loginView/images/logo.png" %}" alt="DishOut logo">
     <!-- Creates a form with 2 fields: Username and Password. It also adds a submit button. 
         changed to using post for security -->
     <form action="." method="POST">
