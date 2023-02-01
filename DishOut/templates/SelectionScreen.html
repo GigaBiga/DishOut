@@ -1,21 +1,34 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "waiter/css/selectionStyle.css" %}">
     <title>DishOut - Waiter app</title>
 </head>
 <body>
-    <h1>Logged in as Username</h1>
-    <h1>Waiter/EPOS Mode</h1>
-    
-    <div>
-        <a href="">Table Satus</a>
-        <a href="">Take An Order</a>
-        <a href="">Ready Dishes</a>
-        <a href="">Pay</a>
+    <div class="top">
+        <h1>Logged in as {{user.username}}</h1>
+        <h1>Waiter/EPOS Mode</h1>
     </div>
-    <a>Logout</a>
+    <div class="button-structure">
+        <div class="buttons">
+            <a href="">Table Satus</a>
+            <a href="">Take An Order</a>
+            <a href="">Ready Dishes</a>
+            <a href="">Pay</a>
+        </div>
+    </div>
+    <div class="logout-button">
+        <a href="{% url 'logout' %}">
+            <img src="{% static "waiter/images/logout.png" %}" alt="logout button">
+        </a>
+    </div>
+    
 </body>
 </html>
+
+

@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.contrib.auth.models import Group
+from django.contrib.auth import logout
 
 
 class loginView(TemplateView, View):
@@ -27,7 +28,7 @@ class loginView(TemplateView, View):
                 login(request, user)
                 #Check if they are part of one of these groups
                 if user.groups.filter(name='Waiter').exists:
-                    #Returns their group (Will be changed later for the url of their specific view)
+                    #Returns the url for the waiter selection screen 
                     return redirect('waiter/')
                 elif user.groups.filter(name='Kitchen').exists:
                     return HttpResponse("Kitchen")
@@ -38,4 +39,3 @@ class loginView(TemplateView, View):
                 #Send the to a page to let them try again
                 return HttpResponse("<h1>User Not Found</h1> <a href="">Try Again?</a>")
 
-                

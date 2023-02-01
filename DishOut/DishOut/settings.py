@@ -32,6 +32,8 @@ ALLOWED_HOSTS = ['192.168.50.190','127.0.0.1','172.31.102.13']
 
 # Application definition
 
+LOGOUT_REDIRECT_URL = '/'
+
 INSTALLED_APPS = [
     'MainDatabase.apps.MainDatabaseConfig',
     'django.contrib.admin',
