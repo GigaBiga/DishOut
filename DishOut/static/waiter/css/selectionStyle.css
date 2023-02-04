@@ -1,20 +1,22 @@
+/* Defines when the css should switch to pc mode determined by screen width */
 @media screen and (min-width: 875px){  
+    /* Defines the font for all the elements */
     body{
         font-family: "Poppins"
     }
-
+    /* Uses flexbox to center and stack the titles */
     .top{
         display: flex;
         justify-content: space-between;
         margin: 0px 40px 0px 40px;
     }
-
+    /* Uses flexbox to center the grid for the buttons */
     .button-structure{
         display: flex;
         justify-content: center;
         margin: 40px 0px 40px 0px;
     }
-
+    /* Uses grid to make a 2x2 grid for the buttons and defines their sizes */
     .buttons{
         display: grid;
         grid-template-columns: 400px 400px;
@@ -24,7 +26,8 @@
         grid-row-gap: 20px;
         text-align: center;
     }
-
+    /* Aligns text in the button and defines the colour of
+     both the text and background aswell as adding postion arguments*/
     .buttons a{
         text-decoration: none;
         color: white;
@@ -37,7 +40,8 @@
         align-items:center;
         justify-content:center;
     }
-
+    /* This is all to define the postition of the logout 
+    button and to contain the logout image in the div */
     .logout-button {
         background-color: #EE5353;
         border-radius: 20px;
@@ -61,19 +65,21 @@
     }
 }
 
+/* Defines when the css should switch to mobile phone mode determined by screen width */
 @media screen and (max-width: 874px) {
+    /* Defines the font for all the elements and centers the titles*/
     body{
         font-family: "Poppins";
         text-align: center;
     }
-
+    /* Uses flexbox to center the grid for the buttons */
     .button-structure{
         display: flex;
         justify-content: center;
         margin: 40px 0px 40px 0px;
         width: 100%;
     }
-
+    /* Uses grid to make a 1x4 grid for the buttons and defines their sizes */
     .buttons{
         display: grid;
         grid-template-columns: 100%;
@@ -83,7 +89,8 @@
         grid-row-gap: 20px;
         text-align: center;
     }
-
+    /* Aligns text in the button and defines the colour of
+     both the text and background aswell as adding postion arguments*/
     .buttons a{
         text-decoration: none;
         color: white;
@@ -96,7 +103,8 @@
         align-items:center;
         justify-content:center;
     }
-
+    /* This is all to define the postition of the logout 
+    button and to contain the logout image in the div */
     .logout-button {
         background-color: #EE5353;
         border-radius: 20px;

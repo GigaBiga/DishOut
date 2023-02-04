@@ -1,3 +1,4 @@
+<!-- Loads the static files address -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -6,14 +7,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- links html to the css style sheet using static -->
     <link rel="stylesheet" href="{% static "waiter/css/selectionStyle.css" %}">
     <title>DishOut - Waiter app</title>
 </head>
 <body>
     <div class="top">
+        <!-- Displays currently logged in user -->
         <h1>Logged in as {{user.username}}</h1>
         <h1>Waiter/EPOS Mode</h1>
     </div>
+    <!-- makes a box for where the different buttons are styled
+         to link to the specific waiter feature -->
     <div class="button-structure">
         <div class="buttons">
             <a href="">Table Satus</a>
@@ -23,7 +28,10 @@
         </div>
     </div>
     <div class="logout-button">
+        <!-- Uses a django link which automatically puts the correct url 
+            of the logout function which is a default function -->
         <a href="{% url 'logout' %}">
+            <!-- Loads static image file for the logout button -->
             <img src="{% static "waiter/images/logout.png" %}" alt="logout button">
         </a>
     </div>
