@@ -1,0 +1,100 @@
+body{
+    font-family: 'Poppins';
+}
+
+header{
+    display: flex;
+    align-items: center;
+    height: 40px; /* Set height of header to align text and SVGs vertically */
+}
+
+header a{
+    margin-right: 24%;
+}
+
+.ColourExplanation{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 40px;
+} 
+
+.ColourExplanation div {
+    margin-left: 10px; /* Add margin between text and SVGs */
+    margin-right: 50px;
+    height: 40px; /* Set height to match header height */
+    line-height: 40px; /* Center text vertically */
+}
+
+#Ready{fill:#60E05D}
+#Waitingtoorder{fill:#E9D734}
+#Waitingfororder{fill:#CE5DE0}
+#Waitingtopay{fill:#F44E4E}
+
+
+.TableButtons{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    margin-top: 50px;
+}
+
+.TableButtons form{
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+}
+
+.table-ready {
+    background-color: #60E05D;
+    height: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-waiting-to-order {
+    background-color: #E9D734;
+    height: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-waiting-for-order {
+    background-color: #CE5DE0;
+    height: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-waiting-to-pay {
+    background-color: #F44E4E;
+    height: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+  
+  
+  
+  

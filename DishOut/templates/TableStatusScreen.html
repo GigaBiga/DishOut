@@ -3,10 +3,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- links html to the css style sheet using static -->
+    <link rel="stylesheet" href="{% static "waiter/css/tableStatusStyle.css" %}">
+    <title>DishOut - Table Status</title>
 </head>
 <body>
     <header>
@@ -14,46 +17,55 @@
         <a href="">Back button</a>
         <!-- Svg creates the box which will later be coloured to 
             tell the user what each colour means -->
-        <svg width ="40" height = "40">
-            <rect width="40" height="40">
-        </svg>
-        <div>Ready</div>
-        <svg width ="40" height = "40">
-            <rect width="40" height="40">
-        </svg>
-        <div>Waiting to order</div>
-        <svg width ="40" height = "40">
-            <rect width="40" height="40">
-        </svg>
-        <div>Waiting for order</div>
-        <svg width ="40" height = "40">
-            <rect width="40" height="40">
-        </svg>
-        <div>Waiting to pay</div>
+        <div class="ColourExplanation">
+            <svg id="Ready" width ="40" height = "40">
+                <rect width="40" height="40">
+            </svg>
+            <div>Ready</div>
+            <svg id="Waitingtoorder" width ="40" height = "40">
+                <rect width="40" height="40">
+            </svg>
+            <div>Waiting to order</div>
+            <svg id="Waitingfororder" width ="40" height = "40">
+                <rect width="40" height="40">
+            </svg>
+            <div>Waiting for order</div>
+            <svg id="Waitingtopay" width ="40" height = "40">
+                <rect width="40" height="40">
+            </svg>
+            <div>Waiting to pay</div>
+        </div>
     </header>
     <!-- Django tag which allows me to dynamically add elements depending on 
         the number of tables in the Tables database -->
-    {% for table in tables %}
-        <!-- Creates a form using the POST method to send data to the backend -->
-        <form action="", method="POST">
-            <!-- Django token which validates form requests -->
-            {% csrf_token %}
-            <!-- Creates a dive to hold the table. Uses javascript on click 
-                so that the whole div becomes a button -->
-            <div class="table" onclick="this.querySelector('input[type=submit]').click()">
-                <!-- For now it will only display the table number and the status -->
-                <p>Table {{ table.Table_Number }}</p>
-                <p>Status: {{ table.Status }}</p>
-                <!-- Checks if the status is equal to ready -->
-                {% if table.Status == "Ready" %}
-                    <!-- Creates the submit button to send the data. Currently uses inline css but will 
-                        later on be in the style sheet -->
-                    <input type="hidden" name="table_number" value="{{ table.Table_Number }}">
-                    <input type="submit" value="Change status" style="display: none;">
-                {% endif %}
-              </div>
-        </form>
-    {% endfor %}
+        <div class="center">
+            <div class="TableButtons">
+                {% for table in tables %}
+                    <!-- Creates a form using the POST method to send data to the backend -->
+                    <form action="", method="POST">
+                        <!-- Django token which validates form requests -->
+                        {% csrf_token %}
+                        <!-- Creates a dive to hold the table. Uses javascript on click
+                            so that the whole div becomes a button -->
+                        <!-- Class is dynamic depending on the table number and its status -->
+                        <div class="{% if table.Status == "Ready" %}table-ready
+                        {% elif table.Status == "Waiting to order" %}table-waiting-to-order
+                        {% elif table.Status == "Waiting for order" %}table-waiting-for-order
+                        {% elif table.Status == "Waiting to pay" %}table-waiting-to-pay{% endif %}" onclick="this.querySelector('input[type=submit]').click()">
+                            <!-- For now it will only display the table number and the status -->
+                            <p style="margin:0px; font-size: 20px;">Table {{ table.Table_Number }}</p>
+                            <p style="margin: 20px 0px;">Status: {{ table.Status }}</p>
+                            <!-- Creates the submit button to send the data. Currently uses inline css but will
+                                later on be in the style sheet -->
+                            {% if table.Status == "Ready" %}
+                            <input type="hidden" name="table_number" value="{{ table.Table_Number }}">
+                            <input type="submit" value="Change status" style="display: none;">
+                            {% endif %}
+                        </div>
+                    </form>
+                {% endfor %}
+            </div>
+        </div>    
 </body>
 </html>
 

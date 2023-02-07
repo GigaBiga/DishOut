@@ -22,7 +22,14 @@ current_time = now.strftime("%H:%M:%S")
 #         # each row is returned as an array so it is split up per each field
 #         menu = Menu(Name=row[0], Price=row[1],Num_Ordered = 0, Category=row[2])
 #         menu.save()
+def addtables():
+    for i in range(1,19):
+        table = Tables(Table_Number = i, Status = "Ready", Total_To_Pay= 0.00, Timer_Status = current_time)
+        table.save()
 
-for i in range(1,19):
-    table = Tables(Table_Number = i, Status = "Ready", Total_To_Pay= 0.00, Timer_Status = current_time)
-    table.save()
+def resettables():
+    for i in range(1,19):
+        tables = Tables.objects.get(Table_Number = i)
+        tables.Status = 'Ready'
+        tables.save()
+resettables()
