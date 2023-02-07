@@ -42,9 +42,10 @@ header a{
 }
 
 .TableButtons form{
-    width: 200px;
-    height: 200px;
+    width: 11vw;
+    height: 11vw;
     margin: 10px;
+    margin-top: 0px;
 }
 
 .table-ready {
