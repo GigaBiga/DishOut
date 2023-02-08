@@ -8,30 +8,41 @@ header{
     height: 40px; /* Set height of header to align text and SVGs vertically */
 }
 
+/* Sets width and makes it size to border box so that image can't escape */
 header a{
-    margin-right: 24%;
+    margin-right: 27vw;
+    width: 2vw;
+    box-sizing: border-box;
 }
 
+/* Image fills the parent box */
+header a img{
+    width: 100%;
+}
+
+/* Makes colour explanation elements align down the middle of the top of the page */
 .ColourExplanation{
     display: flex;
     align-items: center;
     justify-content: space-around;
     height: 40px;
 } 
-
+/* Adds spacing to the colour explanation elements  */
 .ColourExplanation div {
-    margin-left: 10px; /* Add margin between text and SVGs */
+    margin-left: 10px; 
     margin-right: 50px;
-    height: 40px; /* Set height to match header height */
-    line-height: 40px; /* Center text vertically */
+    height: 40px; 
+    line-height: 40px; 
 }
 
+/* Sets the colour for all the boxes (SVGs) in the colour explanation div */
 #Ready{fill:#60E05D}
 #Waitingtoorder{fill:#E9D734}
 #Waitingfororder{fill:#CE5DE0}
 #Waitingtopay{fill:#F44E4E}
 
-
+/* Sets the container styling so that they are in the middle and allows them 
+to wrap around so that they don't all stay on one line */
 .TableButtons{
     display: flex;
     flex-wrap: wrap;
@@ -41,6 +52,7 @@ header a{
     margin-top: 50px;
 }
 
+/* Sets size of each button and their spacing from one another */
 .TableButtons form{
     width: 11vw;
     height: 11vw;
@@ -48,6 +60,8 @@ header a{
     margin-top: 0px;
 }
 
+/* Sets the colour and styling of the button depending on the colour
+   it will also make them all into circles */
 .table-ready {
     background-color: #60E05D;
     height: 100%;

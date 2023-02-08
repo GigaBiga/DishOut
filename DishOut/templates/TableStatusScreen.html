@@ -3,24 +3,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta http-equiv="refresh" content="5">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- links html to the css style sheet using static -->
     <link rel="stylesheet" href="{% static "waiter/css/tableStatusStyle.css" %}">
+    <!-- Links the external JavaScript to this HTML document -->
+    <script src="{% static "waiter/js/tableStatusJS.js" %}"></script>
     <title>DishOut - Table Status</title>
 </head>
 <body>
     <header>
         <!-- Button that takes the user back to the waiter selection screen -->
-        <a href="">Back button</a>
-        <!-- Svg creates the box which will later be coloured to 
-            tell the user what each colour means -->
+        <a href="{% url 'selectView' %}">
+            <!-- loads back button image -->
+            <img src="{% static "waiter/images/backbutton.png" %}" alt="">
+        </a>
+       
         <div class="ColourExplanation">
+             <!-- Svg creates the box which is coloured to
+            tell the user what each colour means -->
             <svg id="Ready" width ="40" height = "40">
                 <rect width="40" height="40">
             </svg>
+            <!-- Holds the status for which that colour is associated to -->
             <div>Ready</div>
             <svg id="Waitingtoorder" width ="40" height = "40">
                 <rect width="40" height="40">
@@ -55,8 +63,8 @@
                             <!-- For now it will only display the table number and the status -->
                             <p style="margin:0px; font-size: 20px;">Table {{ table.Table_Number }}</p>
                             <p style="margin: 20px 0px;">Status: {{ table.Status }}</p>
-                            <!-- Creates the submit button to send the data. Currently uses inline css but will
-                                later on be in the style sheet -->
+                            <!-- Creates the submit button to send the data. 
+                                Only if the table status is equal to ready-->
                             {% if table.Status == "Ready" %}
                             <input type="hidden" name="table_number" value="{{ table.Table_Number }}">
                             <input type="submit" value="Change status" style="display: none;">

@@ -3,6 +3,9 @@ from django.template.response import TemplateResponse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from MainDatabase.models import Tables
+# Used for when changing the status of a table to check the current time
+from datetime import datetime
+
 
 '''This makes it so that to enter the pages after the @
 You must be logged in and if not you are sent to the 
@@ -36,6 +39,12 @@ def tableStatus(request):
         if table.Status == 'Ready':
             #If it is it changes it to waiting to order
             table.Status = 'Waiting to order'
+            # Saves the current time
+            now = datetime.now()
+            # Sets up the format for how the time should be saved
+            current_time = now.strftime("%H:%M:%S")
+            # Changes the Timer_Status to the current time in that format
+            table.Timer_Status = current_time
         #Else it just keeps it the same
         else: table.Status = table.Status
         #Saves the changes to the database
