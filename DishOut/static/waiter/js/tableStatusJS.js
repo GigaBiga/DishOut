@@ -25,7 +25,46 @@ window.addEventListener('beforeunload', storeScrollPosition);
 // Listen for the 'load' event to restore the scroll position
 window.addEventListener('load', restoreScrollPosition);
 
-// Refresh the page every 5 seconds
-setInterval(refreshPage, 5000);
+// Timer function
+function startTimer(startTime,tableNumber) {
+  let currentTime = new Date();
+  startTime = startTime.split(':')
+  console.log(currentTime)
+  let difference = is_minus(currentTime.getHours()-startTime[0]) + ':' + is_minus(currentTime.getMinutes()-startTime[1]) + ':' + is_minus(currentTime.getSeconds()-startTime[2]);
 
+  document.getElementById(`timer-${tableNumber}`).innerHTML = difference;
+}
+
+// Timer data retriver and updater
+function get_times(){
+  fetch('/waiter/TableStatus/get_times')
+      .then(response => response.json())
+      .then(function(data) {
+        console.log(data)
+        let dataL = data.length;
+        for(let i = 0; i < dataL; i++){
+          const tableNumber = data[i].Table_Number;
+          const timerStatus = data[i].Timer_Status;
+          console.log(timerStatus)
+          startTimer(timerStatus,tableNumber)
+        }
+    });
+  };
+
+function is_minus(number){
+  if (number < 0){
+    number = 60 + number; 
+    return number;
+  } else {
+    return number;
+  };
+  
+}
+
+
+// Refresh the page every 5 seconds
+setInterval(refreshPage, 20000);
+
+get_times();
+setInterval(get_times, 1000)
 

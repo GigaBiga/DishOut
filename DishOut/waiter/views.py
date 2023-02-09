@@ -5,7 +5,8 @@ from django.http import HttpResponse
 from MainDatabase.models import Tables
 # Used for when changing the status of a table to check the current time
 from datetime import datetime
-
+# Imports Jsonresponse so that a json response can be sent to the front end
+from django.http import JsonResponse
 
 '''This makes it so that to enter the pages after the @
 You must be logged in and if not you are sent to the 
@@ -65,3 +66,7 @@ def tableStatus(request):
     else: return HttpResponse("Incorrect permissions")
 
 
+@login_required(login_url='/')
+def get_times(request):
+    data = Tables.objects.exclude(Status="Ready").values('Table_Number', 'Timer_Status')
+    return JsonResponse(list(data), safe=False)
