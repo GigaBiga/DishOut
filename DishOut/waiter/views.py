@@ -65,8 +65,13 @@ def tableStatus(request):
         #If not they are sent to a html page which says incorrect permissions
     else: return HttpResponse("Incorrect permissions")
 
-
+# Makes sure that you have to be login to make this API request
 @login_required(login_url='/')
+# Makes the function that returns a JSON with the table number and the timer of that table
 def get_times(request):
+    # gets all table numbers and timer statuses which don't have a status of ready
     data = Tables.objects.exclude(Status="Ready").values('Table_Number', 'Timer_Status')
+    # Returns the tables as a JSON
     return JsonResponse(list(data), safe=False)
+
+    
