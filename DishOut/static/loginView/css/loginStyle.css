@@ -35,6 +35,10 @@
         box-sizing: border-box;
         min-height: 20%;
         min-width: 100%;
+        /* Changes font size to be relative to the page and reduces the 
+        padding of give more space for the text */
+        font-size: 2rem;
+        padding: 15px 10px;
     }
 
     #SubmitButton{
@@ -45,6 +49,19 @@
         font-size: 30px;
         padding: 20px 0px 20px 0px;
         border: 0;
+        /* Defines how long the animation should last and what the cursor should look like */
+        cursor: pointer; 
+        transition-duration: 0ms;  
+    }
+    
+    /* Changes the colour of the button on hover */
+    #SubmitButton:hover{
+        background-color: #313131;
+    }
+
+    /* Moves the button down 5px when it has been clicked */
+    #SubmitButton:active{
+        transform: translateY(5px);
     }
  }
 
@@ -80,6 +97,8 @@
         box-sizing: border-box;
         min-height: 20%;
         min-width: 100%;
+        font-size: 2rem;
+        padding: 15px 10px;
     }
 
     #SubmitButton{
@@ -90,5 +109,14 @@
         font-size: 30px;
         padding: 20px 0px 20px 0px;
         border: 0;
+        cursor: pointer;
+    }
+
+    #Submitbutton:hover{
+        background-color: #313131;
+    }
+
+    #SubmitButton:active{
+        transform: translateY(-20px);
     }
  }

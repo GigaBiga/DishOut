@@ -59,10 +59,10 @@
                         {% elif table.Status == "Waiting to order" %}table-waiting-to-order
                         {% elif table.Status == "Waiting for order" %}table-waiting-for-order
                         {% elif table.Status == "Waiting to pay" %}table-waiting-to-pay{% endif %}" onclick="this.querySelector('input[type=submit]').click()">
-                            <!-- For now it will only display the table number and the status -->
-                            <p style="margin:0px; font-size: 20px;">Table {{ table.Table_Number }}</p>
-                            <p style="margin: 20px 0px;">Status: {{ table.Status }}</p>
-                            <p style="margin:0px;" id="timer-{{ table.Table_Number }}"></p>
+                            <!-- Now it will display the table number,the status and the timer -->
+                            <p class="TableNum">Table {{ table.Table_Number }}</p>
+                            <p class="TableStat">Status: {{ table.Status }}</p>
+                            <p class="TableTime" id="timer-{{ table.Table_Number }}"></p>
                             <!-- Creates the submit button to send the data. 
                                 Only if the table status is equal to ready-->
                             {% if table.Status == "Ready" %}
