@@ -1,0 +1,57 @@
+/* Defines the font and removes the margin */
+body{
+    font-family: "Poppins";
+    margin: 0px;
+    height: 100%;
+}
+
+/* Seperates the two sides of the UI using flex and flips them due to one of them being on the wrong side */
+.main{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    height: 100%;
+}
+
+/* Order section */
+
+.Order{
+    width: 25%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.Current-Order{
+    background-color: yellow;
+    height: 70%;
+}
+
+.Order-buttons{
+    background-color: chocolate;
+    height: 30%;
+}
+
+/* Dish selection section */
+.ListOfDishes{
+    background-color: brown;
+    width: 75%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.Search{
+    background-color: aqua;
+    height: 8%;
+}
+
+.Categories{
+    background-color: greenyellow;
+    height: 8%;
+}
+
+.Dish-Selection{
+    background-color: purple;
+    height: 84%;
+}

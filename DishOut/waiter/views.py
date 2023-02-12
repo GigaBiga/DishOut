@@ -7,6 +7,8 @@ from MainDatabase.models import Tables
 from datetime import datetime
 # Imports Jsonresponse so that a json response can be sent to the front end
 from django.http import JsonResponse
+# Imports the dish information 
+from MainDatabase.models import Menu
 
 '''This makes it so that to enter the pages after the @
 You must be logged in and if not you are sent to the 
@@ -74,4 +76,24 @@ def get_times(request):
     # Returns the tables as a JSON
     return JsonResponse(list(data), safe=False)
 
-    
+
+#Checks that a user is logged in before running the orderTaking function
+@login_required(login_url='/')
+def orderTaking(request):
+    #Loads user data
+    user = request.user
+    #Check to see if they are in the correct group
+    if user.groups.filter(name = 'Waiter').exists():
+        #If they are the page is loaded with the context data
+        return TemplateResponse(request,'OrderTakingSite.html')
+        #If not they are sent to a html page which says incorrect permissions
+    else: return HttpResponse("Incorrect permissions")
+
+# Makes sure that you have to be login to make this API request
+@login_required(login_url='/')
+# Makes the function that returns a JSON with the information of the dishes
+def get_dishInfo(request):
+    # gets all the information for the dishes
+    data = list(Menu.objects.values())
+    # Returns the the dish info as a JSON
+    return JsonResponse(list(data), safe=False)

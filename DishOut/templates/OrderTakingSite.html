@@ -1,0 +1,49 @@
+<!-- Loads the static files address -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- links html to the css style sheet using static -->
+    <link rel="stylesheet" href="{% static "waiter/css/OrderTakingStyle.css" %}">
+    <!-- Links the external JavaScript to this HTML document -->
+    <script src="{% static "waiter/js/orderTakingJS.js" %}"></script>
+    <title>DishOut - Table Status</title>
+</head>
+<body>
+    <div class="main">
+        <!-- Creates a container for the current order to seperate the screen -->
+        <div class="Order">
+            <!-- Creates a container for the current order where the selected items will be listed -->
+            <div class="Current-Order">
+
+            </div>
+            <!-- Creates a container for the buttons to control the order like selecting the table number -->
+            <div class="Order-buttons">
+
+            </div>
+        </div>
+        <!-- Creates a constainer to seperate the dish selection, search, and categories from the current order -->
+        <div class="ListOfDishes">
+            <!-- Creates a container to hold the search bar and the back button -->
+            <div class="Search">
+                <!-- Adds a button that lets you go back to the waiter selection screen -->
+                <a href="{% url 'selectView' %}">Back Button</a>
+            </div>
+            <!-- Creates a container to hold the categories for the dishes -->
+            <div class="Categories">
+
+            </div>
+            <!-- Creates a container for where the dishes will be listed and picked -->
+            <div class="Dish-Selection">
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
