@@ -82,10 +82,16 @@ def get_times(request):
 def orderTaking(request):
     #Loads user data
     user = request.user
+    # Gets all dish data from Menu table
+    dishes = Menu.objects.all()
+    #Adds menu data to the context
+    context = {
+        'dishes':dishes,
+    }
     #Check to see if they are in the correct group
     if user.groups.filter(name = 'Waiter').exists():
         #If they are the page is loaded with the context data
-        return TemplateResponse(request,'OrderTakingSite.html')
+        return TemplateResponse(request,'OrderTakingSite.html', context)
         #If not they are sent to a html page which says incorrect permissions
     else: return HttpResponse("Incorrect permissions")
 

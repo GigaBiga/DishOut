@@ -34,24 +34,104 @@ body{
 
 /* Dish selection section */
 .ListOfDishes{
-    background-color: brown;
     width: 75%;
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
+/* Search Bar styling start */
 .Search{
-    background-color: aqua;
+    /* Relative height for the search bar */
     height: 8%;
+    /* Makes items in the search box display as flex to centralise them */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Adds a border around the search section */
+    border: solid 1px #444444;
 }
+
+.Search a{
+    /* Makes it take up 90% of its flexbox */
+    height: 90%;
+}
+
+.Search a img{
+    /* Forces image to use up all the space of the parent box */
+    height: 100%;
+}
+
+.Search_Bar{
+    /* Sets its height */
+    height: 85%;
+    /* Displays flex and aligns center so elements inside are centered */
+    display: flex;
+    align-items: center;
+    /* Adds a black border with curved edges */
+    border: solid 1px black;
+    border-radius: 15px;
+    /* Sets its width and pacing from other elements */
+    width: 85%;
+    margin: 10px;
+    margin-right: 3vw;
+    box-sizing: border-box;
+}
+/* Styles the search image */
+.Search_Bar img{
+    /* Sets its height and adds padding to add spacing */
+    height: 80%;
+    padding: 10px;
+
+}
+
+.Search_Bar input{
+    /* Changes the font to be relative and to be the Poppins font */
+    font-family: 'Poppins';
+    font-size: 2rem;
+    /* Removes default styling of input boxes */
+    border: none;
+    background-color: transparent;
+    color: black;
+    /* Sets its sizing and spacing */
+    width: 92%;
+    height: 86%;
+    margin-left: 15px;
+}
+/* Removes default styling when clicked on the input box */
+.Search_Bar input:focus {
+    outline: none;
+  }
+
+
+/* Search Bar styling end */
 
 .Categories{
     background-color: greenyellow;
     height: 8%;
 }
 
+/* Dish Selection styling start */
+
 .Dish-Selection{
     background-color: purple;
     height: 84%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    grid-auto-rows: 250px;
+    gap: 20px;
+    box-sizing: border-box;
+    padding: 10px;
 }
+
+.IndivDish{
+    width: 100%;
+    height: 100%;
+}
+
+.IndivDish img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* Dish Selection styling end */

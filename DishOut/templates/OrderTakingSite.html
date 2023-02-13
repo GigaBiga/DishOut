@@ -10,9 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- links html to the css style sheet using static -->
     <link rel="stylesheet" href="{% static "waiter/css/OrderTakingStyle.css" %}">
-    <!-- Links the external JavaScript to this HTML document -->
-    <script src="{% static "waiter/js/orderTakingJS.js" %}"></script>
-    <title>DishOut - Table Status</title>
+    <title>DishOut - Order Taking</title>
 </head>
 <body>
     <div class="main">
@@ -32,7 +30,17 @@
             <!-- Creates a container to hold the search bar and the back button -->
             <div class="Search">
                 <!-- Adds a button that lets you go back to the waiter selection screen -->
-                <a href="{% url 'selectView' %}">Back Button</a>
+                <a href="{% url 'selectView' %}">
+                    <!-- Adds image to the back button of a back button -->
+                    <img src="{% static "waiter/images/backbutton.png" %}" alt="Back button">
+                </a>
+                <!-- Dish search bar -->
+                <div class="Search_Bar">
+                    <!-- Search image -->
+                    <img src="{% static "waiter/images/search.png" %}" alt="Search">
+                    <!-- Search input box -->
+                    <input type="text" id="Search-Bar">
+                </div>
             </div>
             <!-- Creates a container to hold the categories for the dishes -->
             <div class="Categories">
@@ -40,10 +48,23 @@
             </div>
             <!-- Creates a container for where the dishes will be listed and picked -->
             <div class="Dish-Selection">
-
+                <!-- Dynamically adds all the dishes to the HTML -->
+                {% for dish in dishes %}
+                    <!-- Gives them a specific id according to their dish id -->
+                    <div id="dish-{{dish.DishID}}" class="IndivDish">
+                        <!-- Loads image for this dish -->
+                        <img src="{% static 'waiter/images/dishes/' %}{{ dish.Name }}.jpg" alt="">
+                        <!-- Displays dish price -->
+                        <div>£{{dish.Price}}</div>
+                        <!-- Displays dish name -->
+                        <div>{{dish.Name}}</div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
+    <!-- Links the external JavaScript to this HTML document -->
+    <script src="{% static "waiter/js/orderTakingJS.js" %}"></script>
 </body>
 </html>
 
