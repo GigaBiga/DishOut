@@ -106,10 +106,79 @@ body{
 
 /* Search Bar styling end */
 
+
+/*  Categories styling start */
 .Categories{
-    background-color: greenyellow;
     height: 8%;
+    /* Puts the categories in the middle to the left of the div */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* Adds a border around the categories section */
+    border-bottom: solid 1px #444444;
+    box-sizing: border-box;
 }
+
+.Selected-Category{
+    /* sets background colour to  */
+    background-color: #49D681;
+    /* Sets hight and the width to change depending on the text and adds padding */
+    height: 80%;
+    width: max-content;
+    padding-left: 10px;
+    padding-right: 10px;
+    /* Sets spacing around it */
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    /* Sets the border radius to make it curved without having an outline */
+    border-radius: 15px;
+    /* Makes text be in the center of the div */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Sets the text sizing to be relative */
+    font-size: 1.5rem;
+
+}
+
+.Unselected-Categories{
+    /* Centers the categories and aligns them to display in a row */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* sets its hight to the max of the container size */
+    height: 100%;
+    /* Adds border to the left of the div */
+    border-left: solid 1px #444444;
+    /* Adds auto scroll to the unselected categories if screen size is too small */
+    overflow-x: auto;
+}
+
+.UnselectedCat{
+    /* Sets the height and width to change depending on the text and adds padding */
+    height: 80%;
+    width: max-content;
+    padding-left: 10px;
+    padding-right: 10px;
+    /* Sets spacing around it */
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    /* Sets the border radius to make it curved without having an outline */
+    border-radius: 15px;
+    /* Makes text be in the center of the div */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Sets the text sizing to be relative */
+    font-size: 1.5rem;
+    /* Sets the background colour */
+    background-color: #C9D1CD;
+}
+/* Categories styling end */
 
 /* Dish Selection styling start */
 
