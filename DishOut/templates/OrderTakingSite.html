@@ -50,14 +50,17 @@
             <div class="Dish-Selection">
                 <!-- Dynamically adds all the dishes to the HTML -->
                 {% for dish in dishes %}
-                    <!-- Gives them a specific id according to their dish id -->
-                    <div id="dish-{{dish.DishID}}" class="IndivDish">
-                        <!-- Loads image for this dish -->
-                        <img src="{% static 'waiter/images/dishes/' %}{{ dish.Name }}.jpg" alt="">
-                        <!-- Displays dish price -->
-                        <div>£{{dish.Price}}</div>
-                        <!-- Displays dish name -->
-                        <div>{{dish.Name}}</div>
+                    <!-- This is a button which will send which dish has been clicked on to to javascript
+                    It also has a unique id for changing its styling when it is not needed -->
+                    <div class="dish-container" id="dish-{{dish.DishID}}" data-dish-number="{{ forloop.counter0 }}">
+                        <div class="IndivDish">
+                            <!-- Loads image for this dish -->
+                            <img src="{% static 'waiter/images/dishes/' %}{{ dish.Name }}.jpg" alt="">
+                            <!-- Displays dish price -->
+                            <div class="Dish-Price">£{{dish.Price}}</div>
+                            <!-- Displays dish name -->
+                            <div  class="Dish-Name">{{dish.Name}}</div>
+                        </div>
                     </div>
                 {% endfor %}
             </div>

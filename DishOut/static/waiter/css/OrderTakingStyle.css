@@ -114,24 +114,73 @@ body{
 /* Dish Selection styling start */
 
 .Dish-Selection{
-    background-color: purple;
+    /* Relative height for the dish selection */
     height: 84%;
+    /* makes the dish selection scrollable */
+    overflow-y: scroll;
+    /*Adds grid to display the dishes in a responsive grid which changes depending on screen size */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    /* Sets grid template coloumns to fit the screen with a width of 220px each and sets a minimum of 3 collumns*/
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    /* Sets minimum amount of coloumns to 3 */
+    grid-auto-columns: 3;
     grid-auto-rows: 250px;
     gap: 20px;
+    /* adds box spacing and sets its sizing type */
     box-sizing: border-box;
     padding: 10px;
 }
 
 .IndivDish{
+    /* Makes the container for each dish use all the space allocated to it and aligns text */
     width: 100%;
     height: 100%;
+    position: relative;
+    text-align: center;
 }
 
 .IndivDish img{
+    /* Resizes the image to use all the space allocated to it */
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
+.Dish-Price{
+    /* Position the text in the top center of the image */
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(37, 37, 37, 0.93);
+    width: 100%;
+    height:20%;
+    /* Text  styling */
+    color: red;
+    font-size: 1.5rem;
+    font-weight: 600;
+    /* Align the text so that it is in the middle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Dish-Name{
+    /* Position the text in the bottom center of the image */
+    position: absolute;
+    bottom: -10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(37, 37, 37, 0.93);
+    width: 100%;
+    height:20%;
+    /* Text  styling */
+    color: rgb(226, 226, 226);
+    font-size: 1.2rem;
+    /* Align the text so that it is in the middle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Dish Selection styling end */
