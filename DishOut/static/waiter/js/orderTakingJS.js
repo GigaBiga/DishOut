@@ -62,6 +62,8 @@ class OrderTaking{
                 // update the total price
                 this.totalPrice += this.DishesList[DishNum-1][2];
                 console.log(this.current_order);
+                // refreshes the html order list
+                this.addToHTML();
                 return;
             }
         }
@@ -73,6 +75,8 @@ class OrderTaking{
         //Adds the note to the order
         this.current_order[2].push("");
         console.log(this.current_order);
+        // refreshes the html order list
+        this.addToHTML();
     };
 
     // Retrive dish data
@@ -91,6 +95,24 @@ class OrderTaking{
             })
           
         };
+    // Function to add current_order records to the html page
+    addToHTML(){
+        // Clears the order list
+        document.getElementById("CurrentOrderContainer").innerHTML = "";
+        // Loops through the current_order array
+        for (let i=1; i<this.current_order[0].length; i++){
+            // Creates a new div to store the order information
+            var newDiv = document.createElement("div");
+            // Adds the id to the div
+            newDiv.id = "order-"+i;
+            // adds the name as a div to the div with the class ItemProperties
+            newDiv.innerHTML = "<div class='ItemProperties'>"+this.DishesList[this.current_order[0][i]-1][1]+"</div>";
+            // adds the quantity as a div to the div with the class ItemProperties
+            newDiv.innerHTML += "<div class='ItemProperties'>"+this.current_order[1][i]+"</div>";
+            // adds newDiv to the CurrentOrderContainer
+            document.getElementById("CurrentOrderContainer").appendChild(newDiv);
+        }
+    };
     }
 
 // Initialised the OrderTaking object
