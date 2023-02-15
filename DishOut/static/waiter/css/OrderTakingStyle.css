@@ -22,10 +22,33 @@ body{
     flex-direction: column;
 }
 
+/* Current Order styling start */
+
 .Current-Order{
-    background-color: yellow;
+    /* Places the elements inside in the middle at the top*/
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    /* Sets the height to be 70% of the parent div */
     height: 70%;
+    padding: 10px;
+    /* Adds a border on the left and bottom */
+    border-left: solid 1px #444444;
+    border-bottom: solid 1px #444444;
 }
+
+.Current-Order h1{
+    /* Sets the text size to be relative */
+    font-size: 3rem;
+    /* Sets the width to be 100% of the parent div */
+    width: 100%;
+    /* Sets the text to be in the middle of the div */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Current Order styling end */
 
 .Order-buttons{
     background-color: chocolate;
@@ -48,8 +71,8 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* Adds a border around the search section */
-    border: solid 1px #444444;
+    /* Adds a border on the bottom*/
+    border-bottom: solid 1px #444444;
 }
 
 .Search a{
@@ -119,7 +142,7 @@ body{
     box-sizing: border-box;
 }
 
-.Selected-Category{
+#Selected-Category{
     /* sets background colour to  */
     background-color: #49D681;
     /* Sets hight and the width to change depending on the text and adds padding */

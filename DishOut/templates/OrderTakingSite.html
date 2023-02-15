@@ -18,7 +18,10 @@
         <div class="Order">
             <!-- Creates a container for the current order where the selected items will be listed -->
             <div class="Current-Order">
-
+                <!-- Adds a title to the current order -->
+                <h1>Current Order</h1>
+                <!-- Creates a container for the current order where the selected items will be listed -->
+                <div class="CurrentOrderContainer"> </div>
             </div>
             <!-- Creates a container for the buttons to control the order like selecting the table number -->
             <div class="Order-buttons">
@@ -45,14 +48,14 @@
             <!-- Creates a container to hold the categories for the dishes -->
             <div class="Categories">
                 <!-- Adds the selected category -->
-                <div class="Selected-Category">All</div>
+                <div id="Selected-Category">All</div>
                 <div class="Unselected-Categories">
                     <!-- Adds Unselected categories -->
-                    <div class="UnselectedCat">Starters</div>
-                    <div class="UnselectedCat">Mains</div>
-                    <div class="UnselectedCat">Desserts</div>
-                    <div class="UnselectedCat">Drinks</div>
-                    <div class="UnselectedCat">Sides</div>
+                    <div class="UnselectedCat" id="Cat-1">Starter</div>
+                    <div class="UnselectedCat" id="Cat-2">Main</div>
+                    <div class="UnselectedCat" id="Cat-3">Desserts</div>
+                    <div class="UnselectedCat" id="Cat-4">Drinks</div>
+                    <div class="UnselectedCat" id="Cat-5">Sides</div>
                 </div>
             </div>
             <!-- Creates a container for where the dishes will be listed and picked -->

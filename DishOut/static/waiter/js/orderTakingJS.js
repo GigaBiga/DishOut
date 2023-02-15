@@ -26,7 +26,34 @@ class OrderTaking{
         }
     }; 
     
-    dish_selector(DishNum){
+    // Category selection function
+    categorySelect(categoryToBeSelected,id){
+        // Gets the contents of the currently selected category using the Seleted-Category id 
+        var current_selected = document.getElementById("Selected-Category").innerHTML;
+        // Loops through the DishesList array and checks if the category matches the category of the dish
+        for (let i=0; i<this.DishesList.length; i++){
+            // Checks if the category matches the category of the dish 
+            if (this.DishesList[i][4] == categoryToBeSelected){
+                // Makes the dish containers visible
+                document.getElementById("dish-"+this.DishesList[i][0]).style.display = "block";
+            // If the category is equal to "All" it shows all the dishes
+            } else if (categoryToBeSelected == "All"){
+                // Makes the dish containers visible
+                document.getElementById("dish-"+this.DishesList[i][0]).style.display = "block";
+
+            // If the category does not match the category of the dish it hides the dish container
+            } else {
+                // Makes the dish containers invisible
+                document.getElementById("dish-"+this.DishesList[i][0]).style.display = "none";
+            };
+        }
+        // Changes the contents of the currently selected category to the new category
+        document.getElementById("Selected-Category").innerHTML = categoryToBeSelected;
+        // Uses the id of the div then changes its contents to the previous category
+        document.getElementById(id).innerHTML = current_selected;
+    };
+
+    addItem(DishNum){
         // checks if dish is already in any of the order
         for (let i=0; i<this.current_order[0].length; i++){
             if (this.current_order[0][i] == DishNum){
@@ -84,18 +111,34 @@ searchBar.addEventListener('keydown', function(event) {
     }
 });
 
-// Makes the searchButton variable connected to the search button using the ID
-const dishContainers = document.querySelectorAll('.dish-container');
+// Makes the dishButton variable connected to the dish button using the ID
+const dishButton = document.querySelectorAll('.dish-container');
 
 // Loop through each container
-dishContainers.forEach(function(container) {
+dishButton.forEach(function(container) {
   // Add a click event listener to the container
   container.addEventListener('click', function() {
     // Get the dish number from the data attribute of the container
     const dishNumber = container.getAttribute('data-dish-number');
     // Log the dish number to the console
-    console.log(dishNumber);
-    OrderMethods.dish_selector(dishNumber);
+    OrderMethods.addItem(dishNumber);
   });
 });
+
+// Makes the selected button variable connected to the unselected div using the class
+const selectedButton = document.querySelectorAll('.UnselectedCat');
+
+// Loop through each container
+selectedButton.forEach(function(container) {
+    // Add a click event listener to the container
+    container.addEventListener('click', function() {
+        // Get the category name from the contents of the div
+        const category = container.innerHTML;
+        // Gets the id of the div
+        const id = container.id;
+        // Log the dish number to the console
+        OrderMethods.categorySelect(category,id);
+    });
+    }
+);
 
