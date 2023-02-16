@@ -78,7 +78,37 @@ class OrderTaking{
         // refreshes the html order list
         this.addToHTML();
     };
-
+    // Function to remove an item from the order
+    removeItem(DishNum){
+        // Loops through the current_order array
+        for (let i=0; i<this.current_order[0].length; i++){
+            // Checks if the dish number is equal to the dish number in the current_order array
+            if (this.current_order[0][i] == DishNum){
+                // checks if the quantity is greater than 1
+                if (this.current_order[1][i] > 1){
+                    // if the quantity is greater than 1 it decreases the quantity by 1
+                    this.current_order[1][i] -= 1;
+                    // update the total price
+                    this.totalPrice -= this.DishesList[DishNum-1][2];
+                    // refreshes the html order list
+                    this.addToHTML();
+                    return;
+                // if the quantity is equal to 1 it removes the dish from the order
+                } else {
+                    // Removes the dish number from the order
+                    this.current_order[0].splice(i,1);
+                    // Removes the quantity from the order
+                    this.current_order[1].splice(i,1);
+                    // Removes the note from the order
+                    this.current_order[2].splice(i,1);
+                    // refreshes the html order list
+                    this.addToHTML();
+                    return;
+                }
+            }
+        }
+    };
+        
     // Retrive dish data
     get_dishInfo(){
         // Fetches all the dish information from this address
@@ -105,10 +135,20 @@ class OrderTaking{
             var newDiv = document.createElement("div");
             // Adds the id to the div
             newDiv.id = "order-"+i;
+            // Adds the class to the div
+            newDiv.className = "OrderItem";
             // adds the name as a div to the div with the class ItemProperties
-            newDiv.innerHTML = "<div class='ItemProperties'>"+this.DishesList[this.current_order[0][i]-1][1]+"</div>";
+            newDiv.innerHTML = "<div class='ItemName'>"+i+". "+this.DishesList[this.current_order[0][i]-1][1]+"</div>";
             // adds the quantity as a div to the div with the class ItemProperties
-            newDiv.innerHTML += "<div class='ItemProperties'>"+this.current_order[1][i]+"</div>";
+            newDiv.innerHTML += "<div class='ItemProperties'>x"+this.current_order[1][i]+"</div>";
+            // adds the price as a div to the div with the class ItemProperties times by the quantity and makes sure that it is to 2 decimal places and rounded
+            newDiv.innerHTML += "<div class='ItemProperties'>£"+(Math.round((this.DishesList[this.current_order[0][i]-1][2]*this.current_order[1][i])*100)/100).toFixed(2)+"</div>";
+            // Puts the buttons in a div
+            newDiv.innerHTML += "<div class='ItemProperties, Button-Container'>";
+            // adds the plus button as a button to the Button-Container with the class Plus-Button
+            newDiv.innerHTML += "<button class='ItemProperties, Plus-Button' onclick='OrderMethods.addItem("+this.current_order[0][i]+")'>+</button>";
+            // adds the minus button as a button to the div with the class ItemProperties and Minus-Button
+            newDiv.innerHTML += "<button class='ItemProperties, Minus-Button' onclick='OrderMethods.removeItem("+this.current_order[0][i]+")'>-</button>";
             // adds newDiv to the CurrentOrderContainer
             document.getElementById("CurrentOrderContainer").appendChild(newDiv);
         }
@@ -140,8 +180,8 @@ const dishButton = document.querySelectorAll('.dish-container');
 dishButton.forEach(function(container) {
   // Add a click event listener to the container
   container.addEventListener('click', function() {
-    // Get the dish number from the data attribute of the container
-    const dishNumber = container.getAttribute('data-dish-number');
+    // Get the dish number from the data attribute of the container and convert it to an integer then add one to it
+    const dishNumber = parseInt(container.getAttribute('data-dish-number'))+1;
     // Log the dish number to the console
     OrderMethods.addItem(dishNumber);
   });
