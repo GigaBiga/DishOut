@@ -146,10 +146,94 @@ body{
 
 /* Current Order styling end */
 
+/*  Order buttons styling start */
 .Order-buttons{
-    background-color: chocolate;
     height: 30%;
+    /* Makes a grid with 3 collumns and 3 rows */
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    /* Adds a border on the left */
+    border-left: solid 1px #444444;
+    /* Adds 10 px of padding */
+    padding: 10px;
+    /* Adds a gap */
+    gap: 10px;
 }
+
+#Table-Select{
+    /* Makes it so that it uses the first collumn and first row */
+    grid-column: 1;
+    grid-row: 1;
+    /* Makes the background colour grey */
+    background-color: #DCDCDC;
+    /* Makes the font bold and sizes it to fit the container in a relative manner */
+    font-weight: bold;
+    font-size: 1.1vw;
+    /* Sets border to 0 */
+    border: 0px;
+    /* Aligns the text to the left */
+    text-align: left;
+    /* Adds 10 px of padding */
+    padding: 10px;
+    /* Makes font be poppins */
+    font-family: 'Poppins';
+}
+
+#TotalToPay{
+    /* Makes it so that it is in the 2nd and 3rd collumn of the grid  and first row*/
+    grid-column: 2/4;
+    grid-row: 1;
+    /* Makes it so that it is in the middle and to the left of the cell */
+    justify-self: left;
+    align-self: center;
+    /* Sets font to fit container  */
+    font-size: 1.5vw;
+}
+
+#Current-Dish{
+    /* Makes it so that it uses the 1st and 2nd collumn of the 2nd row */
+    grid-column: 1/3;
+    grid-row: 2;
+    /* Sets font to fit container  */
+    font-size: 1.5vw;
+    /* Makes font be poppins */
+    font-family: 'Poppins';
+    /* Makes background green */
+    background-color: #77DD77;
+    /* Removes border */
+    border: 0px;
+
+}
+
+#Note{
+    /* Sets font to fit container  */
+    font-size: 1.5vw;
+    /* Makes font be poppins */
+    font-family: 'Poppins';
+    /* Makes background green */
+    background-color: #f39c22;
+    /* Remove border */
+    border: 0px;
+    
+}
+
+#Submit-Order{
+    /* Make it so that it uses all the collumns on the 3rd row */
+    grid-column: 1/4;
+    grid-row: 3;
+     /* Sets font to fit container  */
+     font-size: 1.5vw;
+     /* Makes font be poppins */
+     font-family: 'Poppins';
+     /* Makes background green */
+     background-color: #38CEEF;
+     /* Removes border */
+     border: 0px;
+}
+
+
+/* Order buttons styling end */
 
 /* Dish selection section */
 .ListOfDishes{
