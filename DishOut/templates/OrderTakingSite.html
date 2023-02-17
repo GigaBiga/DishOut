@@ -38,11 +38,17 @@
                 <!-- Creates a total to pay button -->
                 <div id="TotalToPay">Total: </div>
                 <!-- Creates a current dish selection button -->
-                <button id="Current-Dish">Current Dish: </button>
-                <!-- Creates a note button -->
-                <button id="Note">Note</button>
-                <!-- Creates a submit order button -->
-                <button id="Submit-Order">Submit Order</button>
+                <select name="Current-Dish" id="Current-Dish">
+                    <!-- Adds the default selected option -->
+                    <option value="0" selected>Current Dish: None</option>
+                </select>
+                <!-- Creates a note button which runs the function addNote -->
+                <button id="Note" onclick="OrderMethods.addNote()">
+                    <!-- Adds image to the note button -->
+                    <img src="{% static "waiter/images/editButton.png" %}" alt="Note">
+                </button>
+                <!-- Creates a submit order button and runs the function submitOrder-->
+                <button id="Submit-Order" onclick="OrderMethods.submitOrder()">Submit Order</button>
             </div>
         </div>
         <!-- Creates a constainer to seperate the dish selection, search, and categories from the current order -->

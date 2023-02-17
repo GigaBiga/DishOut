@@ -139,6 +139,7 @@ class OrderTaking{
     addToHTML(){
         // Clears the order list
         document.getElementById("CurrentOrderContainer").innerHTML = "";
+        console.log(this.current_order);
         // Loops through the current_order array
         for (let i=1; i<this.current_order[0].length; i++){
             // Creates a new div to store the order information
@@ -161,6 +162,14 @@ class OrderTaking{
             newDiv.innerHTML += "<button class='ItemProperties, Minus-Button' onclick='OrderMethods.removeItem("+this.current_order[0][i]+")'>-</button>";
             // adds newDiv to the CurrentOrderContainer
             document.getElementById("CurrentOrderContainer").appendChild(newDiv);
+
+            // Adds dish names to Current-Dish selector
+            // Checks if the dish name is already in the dropdown menu
+            if (document.getElementById("Current-Dish").innerHTML.indexOf(this.DishesList[this.current_order[0][i]-1][1]) == -1){
+                // Adds the dish name to the dropdown menu
+                document.getElementById("Current-Dish").innerHTML += "<option value='"+i+"'>"+ i +". "+this.DishesList[this.current_order[0][i]-1][1]+"</option>";
+            }
+
         }
     };
     // Makes a function which gets the selected table number from the dropdown menu with the id Table-Number
@@ -173,6 +182,14 @@ class OrderTaking{
     addTotalToPayHtml(){
         // Adds the total price to the html page
         document.getElementById("TotalToPay").innerHTML = "Total: £"+(Math.round(this.totalPrice*100)/100).toFixed(2);
+    }
+    addNote(){
+        // Gets the dish number from the dropdown menu
+        var numOfDishInList = document.querySelector("#Current-Dish").value;
+        // Makes an alert input box which asks for the note
+        var note = prompt("Please enter a note for the dish");
+        // Adds the note to the current_order array
+        this.current_order[2][numOfDishInList] = note;
     }
 };
 // Initialised the OrderTaking object

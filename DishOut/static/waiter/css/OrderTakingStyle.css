@@ -215,7 +215,16 @@ body{
     background-color: #f39c22;
     /* Remove border */
     border: 0px;
-    
+    /* Adds padding on the top */
+    padding-top: 10px;
+}
+
+#Note img{
+    /* Makes image fill container */
+    width: 80%;
+    /* Makes it stay in the center of the container */
+    justify-self: center;
+    align-self: center;
 }
 
 #Submit-Order{
