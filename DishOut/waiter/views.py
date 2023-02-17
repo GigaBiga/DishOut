@@ -84,9 +84,12 @@ def orderTaking(request):
     user = request.user
     # Gets all dish data from Menu table
     dishes = Menu.objects.all()
-    #Adds menu data to the context
+    # Gets all table numbers
+    tables = Tables.objects.values('Table_Number')
+    #Adds menu data and table numbers to the context
     context = {
         'dishes':dishes,
+        'tables':tables,
     }
     #Check to see if they are in the correct group
     if user.groups.filter(name = 'Waiter').exists():

@@ -26,8 +26,15 @@
             </div>
             <!-- Creates a container for the buttons to control the order like selecting the table number -->
             <div class="Order-buttons">
-                <!-- Creates the table selection button-->
-                <button id="Table-Select">Table Number: </button>
+                <!-- Creates the table selection using html selection-->
+                <select name="Table-Select" id="Table-Select">
+                    <!-- Adds the default selected option -->
+                    <option value="0" selected>Table Number: None</option>
+                    <!-- Dynamically adds all the tables to the HTML -->
+                    {% for table in tables %}
+                        <option value="{{table.Table_Number}}">Table Number: {{table.Table_Number}}</option>
+                    {% endfor %}
+                </select>
                 <!-- Creates a total to pay button -->
                 <div id="TotalToPay">Total: </div>
                 <!-- Creates a current dish selection button -->

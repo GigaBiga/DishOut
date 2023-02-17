@@ -61,7 +61,6 @@ class OrderTaking{
                 this.current_order[1][i] += 1;
                 // update the total price
                 this.totalPrice += this.DishesList[DishNum-1][2];
-                console.log(this.current_order);
                 // refreshes the html order list
                 this.addToHTML();
                 return;
@@ -74,7 +73,6 @@ class OrderTaking{
         this.current_order[1].push(1);
         //Adds the note to the order
         this.current_order[2].push("");
-        console.log(this.current_order);
         // refreshes the html order list
         this.addToHTML();
     };
@@ -153,8 +151,14 @@ class OrderTaking{
             document.getElementById("CurrentOrderContainer").appendChild(newDiv);
         }
     };
-    }
-
+    // Makes a function which gets the selected table number from the dropdown menu with the id Table-Number
+    getTableNumber(){
+        // Makes a variable which is the value of the dropdown menu
+        var tableNumber = document.querySelector("#Table-Select").value;
+        // // Returns the tableNumber variable
+        return tableNumber;
+    };
+};
 // Initialised the OrderTaking object
 OrderMethods = new OrderTaking()
 // Runs the get_dishInfo function to get the dish information
