@@ -63,6 +63,8 @@ class OrderTaking{
                 this.totalPrice += this.DishesList[DishNum-1][2];
                 // refreshes the html order list
                 this.addToHTML();
+                //Update total price in html
+                this.addTotalToPayHtml()
                 return;
             }
         }
@@ -75,6 +77,10 @@ class OrderTaking{
         this.current_order[2].push("");
         // refreshes the html order list
         this.addToHTML();
+        // update the total price
+        this.totalPrice += this.DishesList[DishNum-1][2];
+        // Update total price in HTML
+        this.addTotalToPayHtml()
     };
     // Function to remove an item from the order
     removeItem(DishNum){
@@ -90,6 +96,8 @@ class OrderTaking{
                     this.totalPrice -= this.DishesList[DishNum-1][2];
                     // refreshes the html order list
                     this.addToHTML();
+                    //Update total price in html
+                    this.addTotalToPayHtml()
                     return;
                 // if the quantity is equal to 1 it removes the dish from the order
                 } else {
@@ -101,6 +109,10 @@ class OrderTaking{
                     this.current_order[2].splice(i,1);
                     // refreshes the html order list
                     this.addToHTML();
+                    // update the total price
+                    this.totalPrice -= this.DishesList[DishNum-1][2];
+                    //Update total price in html
+                    this.addTotalToPayHtml()
                     return;
                 }
             }
@@ -158,6 +170,10 @@ class OrderTaking{
         // // Returns the tableNumber variable
         return tableNumber;
     };
+    addTotalToPayHtml(){
+        // Adds the total price to the html page
+        document.getElementById("TotalToPay").innerHTML = "Total: £"+(Math.round(this.totalPrice*100)/100).toFixed(2);
+    }
 };
 // Initialised the OrderTaking object
 OrderMethods = new OrderTaking()
