@@ -176,7 +176,9 @@ class OrderTaking{
     getTableNumber(){
         // Makes a variable which is the value of the dropdown menu
         var tableNumber = document.querySelector("#Table-Select").value;
-        // // Returns the tableNumber variable
+        // Makes tableNumber an integer
+        tableNumber = parseInt(tableNumber);
+        // Returns the tableNumber variable
         return tableNumber;
     };
     addTotalToPayHtml(){
@@ -191,11 +193,77 @@ class OrderTaking{
         // Adds the note to the current_order array
         this.current_order[2][numOfDishInList] = note;
     }
+    async submitOrder(){
+    // Creates XMLHttpRequest object
+    var xhr = new XMLHttpRequest();
+    // Saves the URL to the API
+    var url = "/waiter/OrderTaking/submitOrder";
+    // Makes an empty json order object
+    var order_data = {};
+    // Gets the table number
+    let TableNumber = this.getTableNumber();
+    // Make an array to store the order which holds the table number, DishID and the note
+    var order = [];
+    // Checks if the table number is not 0
+        if (TableNumber != 0){
+            // Iterates through the current_order array
+            for (let i=1; i<this.current_order[0].length; i++){
+                // Makes a for loop which iterates over the quantity of the dish
+                for (let x=0; x<this.current_order[1][i]; x++){
+                    // Adds the order to the order array 
+                    order = [ TableNumber, this.current_order[0][i], this.current_order[2][i]];
+                    // Makes the order_data object into a JSON string
+                    order_data = JSON.stringify(order);
+                    // Sends the order to the API
+                    xhr.open("POST", url, true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    // Sets the CSRF token
+                    xhr.setRequestHeader('X-CSRFToken', this.CSRF_Token);
+                    // Waits for the response from the API
+                    try {
+                        await new Promise((resolve, reject) => {
+                        // Checks if the request is done and if it is successful
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState == 4) {
+                                if (xhr.status == 200) {
+                                    console.log("Order processed successfully!");
+                                    resolve();
+                                } else {
+                                    reject(new Error("Order processing failed"));
+                                }
+                            }
+                        };
+                        // Sends the order data to the API
+                        xhr.send(order_data);
+                        });
+                    // Catches any errors
+                    } catch (error) {
+                        // Prints the error message
+                        console.log(error.message);
+                    }
+                }
+            }
+        }else{
+            // Makes an alert saying that the table number is not selected
+            alert("Table number is not selected");
+        }
+    };
+    // Function which gets the CSRF token using fetch
+    async get_CSRF() {
+        // Fetches the CSRF token from the API
+        const response = await fetch('/waiter/OrderTaking/get_csrf');
+        // Converts the response to a JSON object
+        const data = await response.json();
+        // Gets the CSRF token from the JSON object
+        this.CSRF_Token = data.csrfToken;
+    }    
 };
 // Initialised the OrderTaking object
 OrderMethods = new OrderTaking()
 // Runs the get_dishInfo function to get the dish information
 OrderMethods.get_dishInfo()
+// Runs the get_CSRF function to get the CSRF token
+OrderMethods.get_CSRF()
 
 // Makes the searchBar variable connected to the search bar using the ID
 const searchBar = document.getElementById('Search-Bar');

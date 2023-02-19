@@ -9,6 +9,12 @@ from datetime import datetime
 from django.http import JsonResponse
 # Imports the dish information 
 from MainDatabase.models import Menu
+# Imports the orders table
+from MainDatabase.models import Orders
+# Imports the csrf token
+from django.middleware.csrf import get_token
+
+import json
 
 '''This makes it so that to enter the pages after the @
 You must be logged in and if not you are sent to the 
@@ -106,3 +112,42 @@ def get_dishInfo(request):
     data = list(Menu.objects.values())
     # Returns the the dish info as a JSON
     return JsonResponse(list(data), safe=False)
+
+# Makes sure that you have to be login to make this API request
+@login_required(login_url='/')
+# Makes the function gets JSON data from the front end and saves it to the database
+def submitOrder(request):
+    if request.method == 'POST':
+        # Get the order data from the request
+        order_data = json.loads(request.body)
+        # Split the order data into the table number, dish id and note
+        table_number = Tables.objects.get(Table_Number=int(order_data[0]))
+        dish_id = Menu.objects.get(DishID= int(order_data[1]))
+        note = order_data[2]
+        # Create a new order with the data
+        new_order = Orders(Table_Number=table_number, DishID=dish_id, Status= "New Order",Note=note)
+        # Save the new order to the database
+        new_order.save()
+        # Loads the table that the order was made for
+        table = Tables.objects.get(Table_Number=int(order_data[0]))
+        # Changes the status of the table to waiting for order
+        table.Status = "Waiting for order"
+        # Changes the Total_To_Pay to increment by the price of the dish
+        table.Total_To_Pay += dish_id.Price
+        # Makes the Timer_Status equal to the current time
+        now = datetime.now()
+        current_time = now.strftime("%H:%M:%S")
+        table.Timer_Status = current_time
+        # Saves the changes to the database
+        table.save()
+        # Return a success message to front end
+        return JsonResponse({'status': 'success'})
+
+# Makes sure that you have to be login to make this API request
+@login_required(login_url='/')
+# Makes the function that returns a JSON with the csrf token
+def get_csrf(request):
+    return JsonResponse({'csrfToken': get_token(request)})
+
+
+    
