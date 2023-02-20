@@ -12,12 +12,17 @@
     <link rel="stylesheet" href="{% static "waiter/css/OrderTakingStyle.css" %}">
     <title>DishOut - Order Taking</title>
 </head>
-<body>
+<body> 
     <div class="main">
         <!-- Creates a container for the current order to seperate the screen -->
-        <div class="Order">
+        <!-- Has an id of Mobile-Order as well so that when in mobile I can change when it displays -->
+        <div class="Order" id="Mobile-Order">
             <!-- Creates a container for the current order where the selected items will be listed -->
             <div class="Current-Order">
+                <!-- Adds a button that lets you go back to the dish selection screen -->
+                <button id="Mobile-Button" onclick="OrderMethods.showDishes()">
+                    <img src="{% static "waiter/images/backbutton.png" %}" alt="Show Dishes">
+                </button>
                 <!-- Adds a title to the current order -->
                 <h1>Current Order</h1>
                 <!-- Creates a container for the current order where the selected items will be listed -->
@@ -52,7 +57,8 @@
             </div>
         </div>
         <!-- Creates a constainer to seperate the dish selection, search, and categories from the current order -->
-        <div class="ListOfDishes">
+        <!-- Has an id of Mobile-Dishes as well so that when in mobile I can change when it displays -->
+        <div class="ListOfDishes" id="Mobile-Dishes">
             <!-- Creates a container to hold the search bar and the back button -->
             <div class="Search">
                 <!-- Adds a button that lets you go back to the waiter selection screen -->
@@ -100,6 +106,11 @@
                 {% endfor %}
             </div>
         </div>
+    </div>
+    <!-- Creates a container for the sticky box which has a box to display current order -->
+    <div class="StickyBox" id="Mobile-Only">
+        <!-- Creates a button to display the current order -->
+        <button id="StickyBoxButton" onclick="OrderMethods.showOrder()">View Current Order</button>
     </div>
     <!-- Links the external JavaScript to this HTML document -->
     <script src="{% static "waiter/js/orderTakingJS.js" %}"></script>
