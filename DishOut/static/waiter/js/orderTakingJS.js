@@ -194,58 +194,69 @@ class OrderTaking{
         this.current_order[2][numOfDishInList] = note;
     }
     async submitOrder(){
-    // Creates XMLHttpRequest object
-    var xhr = new XMLHttpRequest();
-    // Saves the URL to the API
-    var url = "/waiter/OrderTaking/submitOrder";
-    // Makes an empty json order object
-    var order_data = {};
-    // Gets the table number
-    let TableNumber = this.getTableNumber();
-    // Make an array to store the order which holds the table number, DishID and the note
-    var order = [];
-    // Checks if the table number is not 0
-        if (TableNumber != 0){
-            // Iterates through the current_order array
-            for (let i=1; i<this.current_order[0].length; i++){
-                // Makes a for loop which iterates over the quantity of the dish
-                for (let x=0; x<this.current_order[1][i]; x++){
-                    // Adds the order to the order array 
-                    order = [ TableNumber, this.current_order[0][i], this.current_order[2][i]];
-                    // Makes the order_data object into a JSON string
-                    order_data = JSON.stringify(order);
-                    // Sends the order to the API
-                    xhr.open("POST", url, true);
-                    xhr.setRequestHeader("Content-Type", "application/json");
-                    // Sets the CSRF token
-                    xhr.setRequestHeader('X-CSRFToken', this.CSRF_Token);
-                    // Waits for the response from the API
-                    try {
-                        await new Promise((resolve, reject) => {
-                        // Checks if the request is done and if it is successful
-                        xhr.onreadystatechange = function() {
-                            if (xhr.readyState == 4) {
-                                if (xhr.status == 200) {
-                                    console.log("Order processed successfully!");
-                                    resolve();
-                                } else {
-                                    reject(new Error("Order processing failed"));
+    // Makes a submit pop up box which asks if the user is sure they want to submit the order and makes the buttons text yes or no
+    var submit = confirm("Are you sure you want to submit the order?");
+    // Checks if the user has clicked ok
+    if (submit == true){ 
+        // Creates XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+        // Saves the URL to the API
+        var url = "/waiter/OrderTaking/submitOrder";
+        // Makes an empty json order object
+        var order_data = {};
+        // Gets the table number
+        let TableNumber = this.getTableNumber();
+        // Make an array to store the order which holds the table number, DishID and the note
+        var order = [];
+        // Checks if the table number is not 0
+            if (TableNumber != 0){
+                // Iterates through the current_order array
+                for (let i=1; i<this.current_order[0].length; i++){
+                    // Makes a for loop which iterates over the quantity of the dish
+                    for (let x=0; x<this.current_order[1][i]; x++){
+                        // Adds the order to the order array 
+                        order = [ TableNumber, this.current_order[0][i], this.current_order[2][i]];
+                        // Makes the order_data object into a JSON string
+                        order_data = JSON.stringify(order);
+                        // Sends the order to the API
+                        xhr.open("POST", url, true);
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                        // Sets the CSRF token
+                        xhr.setRequestHeader('X-CSRFToken', this.CSRF_Token);
+                        // Waits for the response from the API
+                        try {
+                            await new Promise((resolve, reject) => {
+                            // Checks if the request is done and if it is successful
+                            xhr.onreadystatechange = function() {
+                                if (xhr.readyState == 4) {
+                                    if (xhr.status == 200) {
+                                        console.log("Order processed successfully!");
+                                        resolve();
+                                    } else {
+                                        reject(new Error("Order processing failed"));
+                                    }
                                 }
-                            }
-                        };
-                        // Sends the order data to the API
-                        xhr.send(order_data);
-                        });
-                    // Catches any errors
-                    } catch (error) {
-                        // Prints the error message
-                        console.log(error.message);
+                            };
+                            // Sends the order data to the API
+                            xhr.send(order_data);
+                            });
+                        // Catches any errors
+                        } catch (error) {
+                            // Prints the error message
+                            console.log(error.message);
+                        }
                     }
                 }
+                // Resets the current order
+                this.current_order = [[DishID],[Quantity],[Note]];
+                // Resets the total price
+                this.totalPrice = 0;
+                // Updates the html using addToHtml
+                this.addToHtml();
+            }else{
+                // Makes an alert saying that the table number is not selected
+                alert("Table number is not selected");
             }
-        }else{
-            // Makes an alert saying that the table number is not selected
-            alert("Table number is not selected");
         }
     };
     // Function which gets the CSRF token using fetch
@@ -256,7 +267,23 @@ class OrderTaking{
         const data = await response.json();
         // Gets the CSRF token from the JSON object
         this.CSRF_Token = data.csrfToken;
-    }    
+    }   
+    // Makes the showOrder function which makes the Mobile-Order IDs display flex
+    // it also makes Mobile-Dishes and Mobile-Only display none
+    showOrder(){
+        document.getElementById("Mobile-Order").style.display = "flex";
+        document.getElementById("Mobile-Dishes").style.display = "none";
+        document.getElementById("Mobile-Only").style.display = "none";
+    }
+    // Makes the showDishes function which makes the Mobile-Dishes IDs display flex
+    showDishes(){
+        // Makes the Mobile-Order IDs display none
+        document.getElementById("Mobile-Order").style.display = "none";
+        // Makes the Mobile-Dishes IDs display flex
+        document.getElementById("Mobile-Dishes").style.display = "flex";
+        // Makes the Mobile-Only IDs display flex
+        document.getElementById("Mobile-Only").style.display = "flex";
+    }
 };
 // Initialised the OrderTaking object
 OrderMethods = new OrderTaking()
@@ -309,3 +336,10 @@ selectedButton.forEach(function(container) {
     }
 );
 
+// Makes the showOrder function which makes the Mobile-Order class display block
+// it also makes Mobile-Dishes and Mobile-Only display none
+function showOrder(){
+    document.getElementById("Mobile-Order").style.display = "block";
+    document.getElementById("Mobile-Dishes").style.display = "none";
+    document.getElementById("Mobile-Only").style.display = "none";
+}
