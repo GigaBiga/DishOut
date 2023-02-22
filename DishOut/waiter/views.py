@@ -11,8 +11,12 @@ from django.http import JsonResponse
 from MainDatabase.models import Menu
 # Imports the orders table
 from MainDatabase.models import Orders
+# Imports the delivery table
+from MainDatabase.models import Delivery
 # Imports the csrf token
 from django.middleware.csrf import get_token
+# Import the employee table
+from MainDatabase.models import Employees
 
 import json
 
@@ -149,5 +153,73 @@ def submitOrder(request):
 def get_csrf(request):
     return JsonResponse({'csrfToken': get_token(request)})
 
+# Makes sure that you have to be login to access this page
+@login_required(login_url='/')
+# Makes the function that loads the page for the ready dish screen  
+def readyDishes(request):
+    #Loads user data
+    user = request.user
+    # Gets all orders that have a status of ready
+    orders = Orders.objects.filter(Status="Ready")
+    # Adds all records with the username of the user that is logged in from the delivery table
+    delivery = Delivery.objects.filter(Username=user.username)
+    # Adds the orders to the context
+    context = {
+        'orders':orders,
+        'delivery':delivery,
+    }
+    #Check to see if they are in the correct group
+    if user.groups.filter(name = 'Waiter').exists():
+        #If they are the page is loaded with the context data
+        return TemplateResponse(request,'ReadyDishScreen.html', context)
+        #If not they are sent to a html page which says incorrect permissions
+    else: return HttpResponse("Incorrect permissions")
 
-    
+# Makes sure that you have to be login to make this API request
+@login_required(login_url='/')
+# Makes the function that receives an OrderID and a Username and makes a record in the delivery table
+def takeOrder(request):
+    if request.method == 'POST':
+        # Converts the request from JSON to a python diciotnary
+        data = json.loads(request.body)
+        # Gets the order id from the request 
+        username = Employees.objects.get(Username = request.user.username)
+        # Creates a new record in the delivery table
+        new_delivery = Delivery(OrderID=Orders.objects.get(OrderID = data['OrderId']), Username=username)
+        # Saves the new record to the database
+        new_delivery.save()
+        # Loads the order that was taken
+        order = Orders.objects.get(OrderID=data['OrderId'])
+        # Changes the status of the order to taken
+        order.Status = "Taken"
+        # Saves the changes to the database
+        order.save()
+        # Returns a success message to the front end
+        return JsonResponse({'status': 'success'})
+
+# Makes sure that you have to be login to make this API request
+@login_required(login_url='/')
+# Makes the function that receives an OrderID and a Username and removes them from the delivery table
+def deliverOrder(request):
+    if request.method == 'POST':
+        # Converts the request from JSON to a python diciotnary
+        data = json.loads(request.body)
+        # Gets the order id from the request 
+        username = Employees.objects.get(Username = request.user.username)
+        # Removes the record from the delivery table with Username and OrderID
+        delivery = Delivery.objects.filter(Username=username, OrderID=Orders.objects.get(OrderID = data['OrderId']))
+        delivery.delete()
+        # Loads the order that was taken
+        order = Orders.objects.get(OrderID=data['OrderId'])
+        # Changes the status of the order to taken
+        order.Status = "Delivered"
+        # Saves the changes to the database
+        order.save()
+        # Changes the status of the table to waiting to pay
+        table = Tables.objects.get(Table_Number=order.Table_Number.Table_Number)
+        table.Status = "Waiting to pay"
+        # Saves the changes to the database
+        table.save()
+        # Returns a success message to the front end
+        return JsonResponse({'status': 'success'})
+

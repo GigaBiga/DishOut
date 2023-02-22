@@ -1,0 +1,119 @@
+body{
+    margin: 0px;
+    font-family: 'Poppins';
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Title{
+    height: 10vh;
+    width: 100%;
+    font-size: 6vh;
+    font-weight: bold;
+    /* Makes a border at the top and bottom */
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    /* Center the text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Sets the margin */
+    margin: 0px;
+}
+
+.DisplayOrders{
+    max-height: 37.5vh;
+    width: 100%;
+    /* Displays the orders using grid in the center */
+    display: grid;
+    grid-template-columns: 1fr;
+    /* makes the rows be relative to how many divs there are */
+    grid-auto-rows: minmax(10vh, auto);
+    /* Adds a gap */
+    grid-gap: 10px;
+    /* Adds padding */
+    padding: 10px;
+    overflow-y: scroll;
+}
+
+.Order{
+    /* Sets the width */
+    width: 80%;
+    /* Displays the information about the order in a line */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    /* Sets the background colour */
+    background-color: #474747;
+    /* sets the spacing */
+    box-sizing: border-box;
+    /* centers itself in the grid */
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.Order p{
+    font-size: 3.5vh;
+    margin: 0px;
+    margin-left: 10px;
+    /* Colour */
+    color: white;
+}
+
+.Order button{
+    /* Removes border */
+    border: none;
+    /* Sets the background colour */
+    background-color: #60E05D;
+    /* Sets the font size */
+    font-size: 3vh;
+    /* Sets the font family */
+    font-family: 'Poppins';
+    /* Adds padding */
+    padding-left: 5px;
+    padding-right: 5px;
+    /* Adds spacing using margin */
+    margin-right: 10px;
+}
+.Order button:active{
+    /* Sets the background colour */
+    background-color: #419c3f;
+}
+
+#backbutton{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+#backbutton img{
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width: 600px) {
+    #backbutton{
+        position: absolute;
+        top: 22px;
+        left: 0px;
+        width: 40px;
+        height: 40px;
+    }
+    .Order{
+        width: 95%;
+    }
+}
+    
