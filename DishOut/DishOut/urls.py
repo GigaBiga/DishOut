@@ -24,6 +24,7 @@ urlpatterns = [
     path('',views.loginView.as_view()),
     path('admin/', admin.site.urls),
     path('waiter/',include('waiter.urls')),
-    path('logout/',LogoutView.as_view(), name='logout')
+    path('logout/',LogoutView.as_view(), name='logout'),
+    path('kitchen/',include('Kitchen.urls')),
 ] 
 
