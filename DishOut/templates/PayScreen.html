@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to the css file -->
+    <link rel="stylesheet" href="{% static "waiter/css/payStyling.css" %}">
+    <title>DishOut - Pay</title>
+</head>
+<body>
+    <!-- Makes a back button -->
+    <a href="{% url 'selectView' %}" id="backbutton">
+        <!-- Makes the back button image -->
+        <img src="{% static "waiter/images/backbutton.png" %}" alt="Back button">
+    </a>
+    <div class="container">
+        <!-- Makes the title for this section -->
+        <h1 class="Title">Tables Waiting To Pay</h1>
+        <!-- Makes a div for the orders -->
+        <div class="DisplayTables">
+            <!-- Loops through the orders and displays them -->
+            {% for table in tables  %}
+            <div class="Table">
+                <!-- Displays the table number -->
+                <p>Table {{table.Table_Number}}</p>
+                <!-- Makes a button that runs the takeOrder function and gives it the table number and order id through the paramaters -->
+                <button onclick="pay({{table.Table_Number}})">Pay</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
+<!-- Loads the javascript -->
+<script src="{% static "waiter/js/payJS.js" %}"></script>
+

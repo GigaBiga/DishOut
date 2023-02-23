@@ -223,3 +223,39 @@ def deliverOrder(request):
         # Returns a success message to the front end
         return JsonResponse({'status': 'success'})
 
+# Makes sure that you have to be login to access this page
+@login_required(login_url='/')
+# Makes the function that loads the page for the pay screen
+def pay(request):
+    #Loads user data
+    user = request.user
+    # Loads all tables that have a status of waiting to pay
+    tables = Tables.objects.filter(Status="Waiting to pay")
+    # Adds the orders to the context
+    context = {
+        'tables':tables,
+    }
+    #Check to see if they are in the correct group
+    if user.groups.filter(name = 'Waiter').exists():
+        #If they are the page is loaded with the context data
+        return TemplateResponse(request,'PayScreen.html', context)
+        #If not they are sent to a html page which says incorrect permissions
+    else: return HttpResponse("Incorrect permissions")
+
+# Makes sure that you have to be login to make this API request
+@login_required(login_url='/')
+# Makes the function that receives a table number and changes the status of the table to ready and sets the total to pay to 0
+def payTable(request):
+    if request.method == 'POST':
+        # Converts the request from JSON to a python diciotnary
+        data = json.loads(request.body)
+        # Gets the table number from the request 
+        table_number = Tables.objects.get(Table_Number = data['TableNum'])
+        # Changes the status of the table to ready
+        table_number.Status = "Ready"
+        # Sets the total to pay to 0
+        table_number.Total_To_Pay = 0
+        # Saves the changes to the database
+        table_number.save()
+        # Returns a success message to the front end
+        return JsonResponse({'status': 'success'})
