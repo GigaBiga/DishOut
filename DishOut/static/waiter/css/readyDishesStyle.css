@@ -116,4 +116,8 @@ body{
         width: 95%;
     }
 }
-    
+
+/* removes scroll bar */
+::-webkit-scrollbar {
+    display: none;
+}

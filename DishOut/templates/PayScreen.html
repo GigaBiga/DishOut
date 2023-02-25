@@ -22,12 +22,17 @@
         <!-- Makes a div for the orders -->
         <div class="DisplayTables">
             <!-- Loops through the orders and displays them -->
-            {% for table in tables  %}
+            {% for table, count in tableslist  %}
             <div class="Table">
                 <!-- Displays the table number -->
                 <p>Table {{table.Table_Number}}</p>
-                <!-- Makes a button that runs the takeOrder function and gives it the table number and order id through the paramaters -->
-                <button onclick="pay({{table.Table_Number}})">Pay</button>
+                <!-- Display the number of completed orders for this table -->
+                <p>{{ count.0 }} / {{ count.1 }}</p>
+                <!-- Displays the total to pay -->
+                <p>£{{table.Total_To_Pay}}</p>
+                <!-- Makes a button that runs the takeOrder function and gives it the 
+                    table number and the num of orders done and total orders through the paramaters -->
+                <button onclick="pay({{table.Table_Number}},{{count.0}},{{count.1}})">Pay</button>
             </div>
             {% endfor %}
         </div>

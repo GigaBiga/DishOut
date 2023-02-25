@@ -1,0 +1,147 @@
+body{
+    font-family: 'Poppins';
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+#logout{
+    /* Makes it stay at the top right corner of the page */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    /* Makes it 50px*/
+    width: 50px;
+    height: 50px;
+    /* Adds a red background */
+    background-color: #EE5353;
+    /* Adds rounded corners */
+    border-radius: 20px;
+    /* Adds padding */
+    padding: 3px;
+}
+
+#logout img{
+    /* Makes it use 100% of the container */
+    width: 100%;
+    height: 100%;
+}
+
+
+.AllOrders{
+    /* Makes it occupy the whole page */
+    width: 100%;
+    height: 100vh;
+    /* Adds padding */
+    padding: 50px;
+    /* Makes it scrollable */
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+.Order{
+    /* Makes it use 10% of the screen height */
+    height: 16vh;
+    /* Makes a grid with 3 collumns and 2 rows */
+    display: grid;
+    grid-template-columns: 30% 1fr 3fr;
+    grid-template-rows: 35% 65%;
+    margin-bottom: 30px;
+}
+
+.NoteAndStatus{
+    box-sizing: border-box;
+    /* Makes it use the whole space */
+    width: 100%;
+    height: 100%;
+    /* Makes it use the whole 2nd row */
+    grid-column: 1/4;
+    /* Addes a background colour that is grey */
+    background-color: #474747;
+    /* Makes the contents of the div display in flex as a row and centers it*/
+    display: flex;
+    flex-direction: row;
+    /* Sets font colour */ 
+}
+
+.TopText{
+    /* Sets margin to 0 */
+    margin: 0px;
+    /* changes the font size */
+    font-size: 32px;
+    /* Makes it bold */
+    font-weight: bold;
+}
+
+.OrderNote{
+    /* Makes it use the whole space */
+    height: 100%;
+    width: 30%;
+    /* Makes the contents of the div centered */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Removes margin*/
+    margin: 0px;
+    box-sizing: border-box;
+    /* Adds a border to the right of the order box */
+    border-right: 3px solid #ACACAC;
+    /* Makes text colour white */
+    color: white;
+}
+
+.StatusChain{
+    /* Makes it use the whole space */
+    height: 100%;
+    width: 70%;
+    /* Makes the contents of the div centered and spaced evenly */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* Removes margin*/
+    margin: 0px;
+    box-sizing: border-box;
+    /* Sets background colour to grey */
+    background-color: #474747;
+    /* Removes border */
+    border: none;
+}
+
+.StatusChain:active{
+    /* Makes the background colour darker */
+    background-color: #292929;
+}
+
+.StatusChain img{
+    /* Makes it use 100% of the container */
+    height: 100%;
+    user-select: none; /* prevents image selection */
+    pointer-events: none; /* disables pointer events on the image */
+}
+
+.Status{
+    /* Makes the background colour grey */
+    background-color: #D9D9D9;
+    /* Adds padding */
+    padding: 15px;
+    /* Adds rounded corners */
+    border-radius: 15px;
+    /* Makes the text bigger */
+    font-size: 24px;
+}
+
+/* removes the scroll bar */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Will be used by javascript to add styling to the status */
+.CurrentStatus{
+    /* Makes the background colour green */
+    background-color: #7AE484;
+}
+
+.IncompleteStatus{
+    /* Makes the background colour red */
+    background-color: #FB7A7A;
+}

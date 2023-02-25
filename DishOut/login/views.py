@@ -26,13 +26,13 @@ class loginView(TemplateView, View):
             if user is not None:
                 #log them in
                 login(request, user)
-                #Check if they are part of one of these groups
-                if user.groups.filter(name='Waiter').exists:
-                    #Returns the url for the waiter selection screen 
+                #Check if they are part of one of the Waiter , Kitchen or Manager groups
+                groups = user.groups.all()
+                if groups.filter(name='Waiter').exists():
                     return redirect('waiter/')
-                elif user.groups.filter(name='Kitchen').exists:
-                    return HttpResponse("Kitchen")
-                elif user.groups.filter(name='Manager').exists:
+                elif groups.filter(name='Kitchen').exists():
+                    return redirect('kitchen/')
+                elif groups.filter(name='Manager').exists():
                     return HttpResponse("Manager")
                 else: return HttpResponse("No permission group assigned to this user")
             else:

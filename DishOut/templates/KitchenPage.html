@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Link to the font -->
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="{% static 'kitchen/css/KitchenPageStyle.css' %}">
+    <title>DishOut - Kitchen</title>
+</head>
+<body>
+    <!-- Logout button -->
+    <a id="logout" href="{% url 'logout' %}">
+        <!-- Loads static image file with the logout button -->
+        <img src="{% static 'waiter/images/logout.png' %}" alt="Logout">
+    </a>
+    <!-- Dynamic loading of orders -->
+    <div class="AllOrders">
+    {% for order in Orders %}
+        <!-- Holds each order -->
+        <div class="Order">
+            <h3 class="TopText">Order Note</h3>
+            <!--  Shows the table number for the order-->
+            <h3 class="TopText">Table {{order.Table_Number.Table_Number}}</h3>
+            <!-- Shows the dish name for the order -->
+            <h3 class="TopText">{{order.DishID.Name}}</h3>
+            <div class="NoteAndStatus">
+                <!-- Shows the order note -->
+                <p class="OrderNote">{{order.Note}}</p>
+                <!-- Shows the order status and has a dataset variable
+                     showing the current status of the order and is also 
+                     a button which when clicked progresses the order by one-->
+                <button class="StatusChain" data-status="{{order.Status}}" onclick="progressOrder('{{order.Status}}',{{order.OrderID}})" >
+                    <p class="Status">New Order</p>
+                    <img src="{% static 'kitchen/img/Next_arrow.png' %}" alt="">
+                    <p class="Status">Preparing</p>
+                    <img src="{% static 'kitchen/img/Next_arrow.png' %}" alt="">
+                    <p class="Status">Cooking</p>
+                    <img src="{% static 'kitchen/img/Next_arrow.png' %}" alt="">
+                    <p class="Status">Ready</p>
+                </button>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</body>
+</html>
+<!-- Links the javascript -->
+<script src="{% static 'kitchen/js/KitchenPage.js' %}"></script>
+

@@ -138,6 +138,8 @@ def submitOrder(request):
         table.Status = "Waiting for order"
         # Changes the Total_To_Pay to increment by the price of the dish
         table.Total_To_Pay += dish_id.Price
+        # Makes total to pay rounded to 2 decimal places
+        table.Total_To_Pay = round(table.Total_To_Pay, 2)
         # Makes the Timer_Status equal to the current time
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
@@ -231,9 +233,25 @@ def pay(request):
     user = request.user
     # Loads all tables that have a status of waiting to pay
     tables = Tables.objects.filter(Status="Waiting to pay")
-    # Adds the orders to the context
+    # Gets all orders that have a status of delivered
+    orders = Orders.objects.filter(Status="Delivered")
+    # Gets all orders
+    orders = Orders.objects.all()
+    # Create a 2D array to store the number of completed and not completed orders for each table
+    table_orders_count = []
+    # Loops through each table
+    for table in tables:
+        # Gets the number of completed and not completed orders for each table
+        completed_count = orders.filter(Table_Number=table, Status='Delivered').count()
+        # Gets the number of orders for each table
+        count = orders.filter(Table_Number=table).count()
+        # Adds the number of completed and not completed orders for each table to the 2D array
+        table_orders_count.append((completed_count, count))
+    # Join the tables and the 2D array together so that they can both be used in one for loop
+    tableslist = zip(tables, table_orders_count)
+    # Adds the tables to the context
     context = {
-        'tables':tables,
+        'tableslist': tableslist,
     }
     #Check to see if they are in the correct group
     if user.groups.filter(name = 'Waiter').exists():
@@ -241,6 +259,9 @@ def pay(request):
         return TemplateResponse(request,'PayScreen.html', context)
         #If not they are sent to a html page which says incorrect permissions
     else: return HttpResponse("Incorrect permissions")
+
+
+
 
 # Makes sure that you have to be login to make this API request
 @login_required(login_url='/')

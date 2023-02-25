@@ -248,11 +248,11 @@ class OrderTaking{
                     }
                 }
                 // Resets the current order
-                this.current_order = [[DishID],[Quantity],[Note]];
+                this.current_order = [["DishID"],["Quantity"],["Note"]];
                 // Resets the total price
                 this.totalPrice = 0;
                 // Updates the html using addToHtml
-                this.addToHtml();
+                this.addToHTML();
             }else{
                 // Makes an alert saying that the table number is not selected
                 alert("Table number is not selected");
