@@ -162,14 +162,8 @@ class OrderTaking{
             newDiv.innerHTML += "<button class='ItemProperties, Minus-Button' onclick='OrderMethods.removeItem("+this.current_order[0][i]+")'>-</button>";
             // adds newDiv to the CurrentOrderContainer
             document.getElementById("CurrentOrderContainer").appendChild(newDiv);
-
-            // Adds dish names to Current-Dish selector
-            // Checks if the dish name is already in the dropdown menu
-            if (document.getElementById("Current-Dish").innerHTML.indexOf(this.DishesList[this.current_order[0][i]-1][1]) == -1){
-                // Adds the dish name to the dropdown menu
-                document.getElementById("Current-Dish").innerHTML += "<option value='"+i+"'>"+ i +". "+this.DishesList[this.current_order[0][i]-1][1]+"</option>";
-            }
-
+            // Updates the current dish dropdown menu
+            this.addDishesToCurrentDish();
         }
     };
     // Makes a function which gets the selected table number from the dropdown menu with the id Table-Number
@@ -190,6 +184,17 @@ class OrderTaking{
         var numOfDishInList = document.querySelector("#Current-Dish").value;
         // Makes an alert input box which asks for the note
         var note = prompt("Please enter a note for the dish");
+        // Makes an alert input box which asks how many of the dishes the user wants to have the note on
+        // Makes the variable quantity an integer and the question shows how many dishes there are
+        var quantity = parseInt(prompt("How many of the dish do you want to have the note on? [Max: "+this.current_order[1][numOfDishInList]+"]"));
+        // Checks if the quantity is less than 1 or greater than the quantity of the dish. Keeps asking until the quantity is valid
+        while (quantity < 1 || quantity > this.current_order[1][numOfDishInList]){
+            // Makes an alert box which says that the quantity is invalid
+            alert("Invalid quantity");
+            // Makes them do it again
+            quantity = parseInt(prompt("How many of the dish do you want to have the note on? [Max: "+this.current_order[1][numOfDishInList]+"]"));
+        }
+        note = note+" {"+quantity;
         // Adds the note to the current_order array
         this.current_order[2][numOfDishInList] = note;
     }
@@ -214,8 +219,27 @@ class OrderTaking{
                 for (let i=1; i<this.current_order[0].length; i++){
                     // Makes a for loop which iterates over the quantity of the dish
                     for (let x=0; x<this.current_order[1][i]; x++){
+                        // Checks if the note is not empty
+                        if (this.current_order[2][i] != ""){
+                            // Splits the note into an array via the { character
+                            var notearray = this.current_order[2][i].split("{");
+                            // Defines the actual note as the first element of the array
+                            var note = notearray[0];
+                            // Defines the quantity of the note as the second element of the array
+                            var notequantity = notearray[1];
+                            // Checks if the quantity of the note is greater or equal to 1
+                            if (notequantity >= 1){
+                                // Gets the order and changes the last character of the note to be one less then notequantity
+                                this.current_order[2][i] = note+"{"+(notequantity-1);
+                            } else {
+                                // If the quantity of the note is not greater than 1 then it sets the note to be empty
+                                this.current_order[2][i] = "";
+                                note = "";
+                            }
+                        // If the note is empty then it sets the note variable to be empty
+                        } else { var note = ""; }
                         // Adds the order to the order array 
-                        order = [ TableNumber, this.current_order[0][i], this.current_order[2][i]];
+                        order = [ TableNumber, this.current_order[0][i], note];
                         // Makes the order_data object into a JSON string
                         order_data = JSON.stringify(order);
                         // Sends the order to the API
@@ -253,6 +277,8 @@ class OrderTaking{
                 this.totalPrice = 0;
                 // Updates the html using addToHtml
                 this.addToHTML();
+                // Updates the total price
+                this.addTotalToPayHtml();
             }else{
                 // Makes an alert saying that the table number is not selected
                 alert("Table number is not selected");
@@ -283,6 +309,21 @@ class OrderTaking{
         document.getElementById("Mobile-Dishes").style.display = "flex";
         // Makes the Mobile-Only IDs display flex
         document.getElementById("Mobile-Only").style.display = "flex";
+    }
+    // Makes a function which adds the dishes to the Current Dish dropdown menu
+    addDishesToCurrentDish(){
+        // gets the Current-Dish dropdown menu and removes all the options by empting the innerHTML
+        document.getElementById("Current-Dish").innerHTML = "";
+        // Firstly adds the default option to the dropdown menu
+        document.getElementById("Current-Dish").innerHTML += '<option value="0" selected>Current Dish: None</option>';
+        // Iterates through the current_order array and adds the dish names to the dropdown menu
+        for (let i=1; i<this.current_order[0].length; i++){
+            // Checks if the dish name is already in the dropdown menu
+            if (document.getElementById("Current-Dish").innerHTML.indexOf(this.DishesList[this.current_order[0][i]-1][1]) == -1){
+                // Adds the dish name to the dropdown menu
+                document.getElementById("Current-Dish").innerHTML += "<option value='"+i+"'>"+ i +". "+this.DishesList[this.current_order[0][i]-1][1]+"</option>";
+            }
+        }
     }
 };
 // Initialised the OrderTaking object

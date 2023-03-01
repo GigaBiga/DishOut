@@ -132,6 +132,11 @@ def submitOrder(request):
         new_order = Orders(Table_Number=table_number, DishID=dish_id, Status= "New Order",Note=note)
         # Save the new order to the database
         new_order.save()
+        # Loads the dishID and increments the number of times it has been ordered by one
+        dish_id = Menu.objects.get(DishID=int(order_data[1]))
+        dish_id.Num_Ordered = dish_id.Num_Ordered + 1
+        # Saves the changes to the database
+        dish_id.save()
         # Loads the table that the order was made for
         table = Tables.objects.get(Table_Number=int(order_data[0]))
         # Changes the status of the table to waiting for order
