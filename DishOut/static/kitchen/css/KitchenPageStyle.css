@@ -88,6 +88,8 @@ body{
     border-right: 3px solid #ACACAC;
     /* Makes text colour white */
     color: white;
+    /* Makes the text bigger */
+    font-size: 12px;
 }
 
 .StatusChain{

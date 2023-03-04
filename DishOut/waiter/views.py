@@ -222,6 +222,10 @@ def deliverOrder(request):
         order.Status = "Delivered"
         # Saves the changes to the database
         order.save()
+        # Uses the username to add on to Orders_Delivered field in the employees table
+        username.Orders_delivered += 1
+        # Saves the changes to the database
+        username.save()
         # Changes the status of the table to waiting to pay
         table = Tables.objects.get(Table_Number=order.Table_Number.Table_Number)
         table.Status = "Waiting to pay"
@@ -283,5 +287,9 @@ def payTable(request):
         table_number.Total_To_Pay = 0
         # Saves the changes to the database
         table_number.save()
+        # Gets all the orders for the table
+        orders = Orders.objects.filter(Table_Number=table_number)
+        # Deletes them all
+        orders.delete()
         # Returns a success message to the front end
         return JsonResponse({'status': 'success'})

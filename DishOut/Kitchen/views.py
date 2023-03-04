@@ -20,8 +20,8 @@ import json
 def kitchen(request):
     #Gets the user
     user = request.user
-    #Gets the orders with status of New Order, Preparing, Cooking and Ready
-    orders = Orders.objects.filter(Status__in = ['New Order','Preparing','Cooking','Ready'])
+    #Gets the orders with status of New Order, Preparing, Cooking
+    orders = Orders.objects.filter(Status__in = ['New Order','Preparing','Cooking'])
     context = {
         'Orders' : orders,
     }

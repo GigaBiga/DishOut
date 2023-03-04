@@ -23,8 +23,8 @@ function takeOrder(OrderId){
         // Sends the request
         xhr.send(JSON.stringify({OrderId: OrderId}));
     });
-    // Refreses the page after .5 seconds
-    setTimeout(function(){ window.location.reload(); }, 500);
+    // Refreses the page after 1 seconds
+    setTimeout(function(){ window.location.reload(); }, 100);
 };
 
 // Uses xmlhttprequest to send order id to the API
@@ -43,7 +43,7 @@ function deliverOrder(OrderId){
         xhr.send(JSON.stringify({OrderId: OrderId}));
     });
     // Refreses the page after .5 seconds
-    setTimeout(function(){ window.location.reload(); }, 500);
+    setTimeout(function(){ window.location.reload(); }, 100);
 };
 
 // Refresh the page every 5 seconds

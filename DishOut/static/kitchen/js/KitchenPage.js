@@ -64,10 +64,10 @@ function progressOrder(status, orderID){
             OrderID: orderID
         }));
     });
-
     // Refreshes the page after .5 seconds
-    setTimeout(() => { window.location.reload(); }, 500);
-}
+    setTimeout(() => { window.location.reload(); }, 100);
+};
+
 
 
 // Run the updateStatus function when the page loads

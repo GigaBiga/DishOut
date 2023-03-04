@@ -26,6 +26,8 @@
             <div class="Order">
                 <!-- Displays the table number -->
                 <p>Table {{order.Table_Number.Table_Number}}</p>
+                <!-- Displays the dish name -->
+                <p>{{order.DishID.Name}}</p>
                 <!-- Makes a button that runs the takeOrder function and gives it the table number and order id through the paramaters -->
                 <button onclick="takeOrder({{order.OrderID}})">Take</button>
             </div>
@@ -39,6 +41,8 @@
             <div class="Order">
                 <!-- Displays the table number -->
                 <p>Table {{x.OrderID.Table_Number.Table_Number}}</p>
+                <!-- Displays the dish name -->
+                <p>{{x.OrderID.DishID.Name}}</p>                
                 <!-- Makes a button to mark the order as delivered -->
                 <button onclick="deliverOrder({{x.OrderID.OrderID}})">Delivered</button>
             </div>
