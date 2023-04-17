@@ -1,3 +1,5 @@
+// static/waiter/js/orderTakingJS.js
+
 // Creates the order taking class that will take care of search, selection of dishes and storing them in the order list
 class OrderTaking{
     // Used to initialise the starting variables

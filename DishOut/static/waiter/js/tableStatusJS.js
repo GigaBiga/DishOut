@@ -1,32 +1,27 @@
+// static/waiter/js/tableStatusJS.js
+
 // Declare a variable to store the scroll position
 let scrollPosition;
-
 // Function to store the scroll position before page reload
 function storeScrollPosition() {
   // Get the current vertical scroll position of the page
   scrollPosition = window.pageYOffset;
 }
-
 // Function to refresh the page
 function refreshPage() {
   // Reload the page
   window.location.reload();
 }
-
 // Function to restore the scroll position after page reload
 function restoreScrollPosition() {
   // Scroll to the stored scroll position
   window.scrollTo(0, scrollPosition);
 }
-
 // Listen for the 'beforeunload' event to store the scroll position
 window.addEventListener('beforeunload', storeScrollPosition);
-
 // Listen for the 'load' event to restore the scroll position
 window.addEventListener('load', restoreScrollPosition);
-
 // Timer function
-
 // Timer data retriver and updater
 function get_times(){
   // Fetches the table start times and table numbers from the API

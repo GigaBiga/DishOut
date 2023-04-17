@@ -1,3 +1,5 @@
+// static/waiter/js/readyDishes.js
+
 // Function which gets the CSRF token using fetch
 async function get_CSRF() {
     // Fetches the CSRF token from the API

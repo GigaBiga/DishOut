@@ -1,3 +1,5 @@
+/* static/waiter/css/tableStatusStyle.css */
+
 /* Defines when the css should switch to pc mode determined by screen width */
 @media screen and (min-width: 901px){  
     body{
